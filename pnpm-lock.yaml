@@ -182,6 +182,9 @@ importers:
       '@istanbuljs/schema':
         specifier: 'catalog:'
         version: 0.1.6
+      '@jridgewell/trace-mapping':
+        specifier: 'catalog:'
+        version: 0.3.31
       '@vitest/istanbul-lib-coverage':
         specifier: workspace:*
         version: link:../istanbul-lib-coverage

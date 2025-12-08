@@ -13,6 +13,7 @@
   "dependencies": {
     "@babel/core": "catalog:",
     "@babel/parser": "catalog:",
+    "@jridgewell/trace-mapping": "catalog:",
     "@istanbuljs/schema": "catalog:",
     "@vitest/istanbul-lib-coverage": "workspace:*",
     "semver": "catalog:"
