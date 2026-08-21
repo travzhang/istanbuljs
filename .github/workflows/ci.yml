@@ -1,40 +1,56 @@
+name: CI
+
+# Remove default permissions of GITHUB_TOKEN for security
+# https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
+permissions: {}
+
 on:
   push:
     branches:
       - main
+
   pull_request:
-    types: [assigned, opened, synchronize, reopened, labeled]
-name: ci
+
+  workflow_dispatch:
+
 jobs:
   test:
-    runs-on: ubuntu-latest
+    name: "Test: node-${{ matrix.node }}, ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: [10, 12, 14, 16, 18, 20, 21]
+        os: [ubuntu-latest]
+        node: [22, 24, 26]
+        include:
+          - os: windows-latest
+            node: 22
+          - os: macos-latest
+            node: 22
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+
+      - name: Set node version to ${{ matrix.node }}
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: ${{ matrix.node }}
-      - run: node --version
-      # The first installation step ensures that all of our production
-      # dependencies work on the given Node.js version, this helps us find
-      # dependencies that don't match our engines field:
-      - run: npm install --production --engine-strict --ignore-scripts --no-package-lock
-      # Clean up the production install, before installing dev/production:
-      - run: rm -rf node_modules
-      - run: npm install
-      - run: npm test
-        env:
-          MOCHA_THROW_DEPRECATION: false
-  windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-      - run: npm install
-      - run: npm test
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install
+
+      - name: Format
+        run: pnpm fmt --check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
         env:
           MOCHA_THROW_DEPRECATION: false

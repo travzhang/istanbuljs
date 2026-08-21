@@ -7,6 +7,9 @@ trustPolicy: no-downgrade
 trustPolicyExclude:
   - semver@5.7.2
   - semver@6.3.1
+allowBuilds:
+  "fsevents": true
+  "highlight.js": true
 packages:
   - packages/*
 catalog:
