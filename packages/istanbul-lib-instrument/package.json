@@ -21,11 +21,13 @@
     "directory": "packages/istanbul-lib-instrument"
   },
   "files": [
-    "src"
+    "dist"
   ],
   "type": "module",
-  "main": "src/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": "./dist/index.mjs",
   "scripts": {
+    "build": "tsdown",
     "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-instrument"
   },
   "dependencies": {
@@ -38,11 +40,13 @@
   },
   "devDependencies": {
     "@babel/cli": "catalog:",
+    "@types/babel__core": "catalog:",
     "clone": "catalog:",
     "debug": "catalog:",
     "documentation": "catalog:",
     "js-yaml": "catalog:",
-    "nopt": "catalog:"
+    "nopt": "catalog:",
+    "tsdown": "catalog:"
   },
   "engines": {
     "node": ">=22"

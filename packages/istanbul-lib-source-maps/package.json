@@ -22,12 +22,13 @@
     "directory": "packages/istanbul-lib-source-maps"
   },
   "files": [
-    "lib",
-    "index.mjs"
+    "dist"
   ],
   "type": "module",
-  "main": "index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": "./dist/index.mjs",
   "scripts": {
+    "build": "tsdown",
     "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-source-maps"
   },
   "dependencies": {
@@ -36,7 +37,7 @@
     "debug": "catalog:"
   },
   "devDependencies": {
-    "ts-node": "catalog:"
+    "tsdown": "catalog:"
   },
   "engines": {
     "node": ">=22"

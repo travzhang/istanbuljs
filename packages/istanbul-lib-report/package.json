@@ -21,12 +21,13 @@
     "directory": "packages/istanbul-lib-report"
   },
   "files": [
-    "lib",
-    "index.mjs"
+    "dist"
   ],
   "type": "module",
-  "main": "index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": "./dist/index.mjs",
   "scripts": {
+    "build": "tsdown",
     "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-report"
   },
   "dependencies": {
@@ -35,7 +36,8 @@
     "supports-color": "catalog:"
   },
   "devDependencies": {
-    "rimraf": "catalog:"
+    "rimraf": "catalog:",
+    "tsdown": "catalog:"
   },
   "engines": {
     "node": ">=22"

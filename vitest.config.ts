@@ -5,7 +5,7 @@ export default defineConfig({
     coverage: {
       enabled: true,
       provider: "v8",
-      include: ["packages/**/index.mjs", "packages/**/lib/**/*.mjs"],
+      include: ["packages/**/src/**/*.ts"],
       exclude: ["**/istanbul-reports/**"],
     },
     projects: ["packages/*"],

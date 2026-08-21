@@ -19,17 +19,19 @@
     "directory": "packages/istanbul-reports"
   },
   "files": [
-    "index.mjs",
-    "lib"
+    "dist"
   ],
   "type": "module",
-  "main": "index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": "./dist/index.mjs",
   "scripts": {
+    "build": "tsdown",
     "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-reports",
-    "prepare": "webpack --config lib/html-spa/webpack.config.js --mode production",
-    "prepare:watch": "webpack --config lib/html-spa/webpack.config.js --watch --mode development"
+    "build:spa": "webpack --config src/html-spa/webpack.config.cjs --mode production",
+    "build:spa:watch": "webpack --config src/html-spa/webpack.config.cjs --watch --mode development"
   },
   "dependencies": {
+    "@vitest/istanbul-lib-coverage": "workspace:*",
     "@vitest/istanbul-lib-report": "workspace:*",
     "html-escaper": "catalog:"
   },
@@ -37,11 +39,11 @@
     "@babel/core": "catalog:",
     "@babel/preset-env": "catalog:",
     "@babel/preset-react": "catalog:",
-    "@vitest/istanbul-lib-coverage": "workspace:*",
     "babel-loader": "catalog:",
     "is-windows": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "tsdown": "catalog:",
     "webpack": "catalog:",
     "webpack-cli": "catalog:"
   },
