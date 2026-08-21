@@ -43,6 +43,6 @@
   },
   "homepage": "https://vitest.dev/",
   "engines": {
-    "node": ">=8"
+    "node": ">=22"
   }
 }
