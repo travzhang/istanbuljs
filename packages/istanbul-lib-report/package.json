@@ -12,15 +12,15 @@
     "test": "nyc mocha"
   },
   "dependencies": {
-    "@vitest/istanbul-lib-coverage": "^0.0.0",
-    "make-dir": "^4.0.0",
-    "supports-color": "^7.1.0"
+    "@vitest/istanbul-lib-coverage": "workspace:*",
+    "make-dir": "catalog:",
+    "supports-color": "catalog:"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.2.2",
-    "nyc": "^15.0.0-beta.2",
-    "rimraf": "^3.0.0"
+    "chai": "catalog:",
+    "mocha": "catalog:",
+    "nyc": "catalog:",
+    "rimraf": "catalog:"
   },
   "license": "MIT",
   "bugs": {

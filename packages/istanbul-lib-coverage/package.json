@@ -12,9 +12,9 @@
     "test": "nyc mocha"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.2.2",
-    "nyc": "^15.0.0-beta.2"
+    "chai": "catalog:",
+    "mocha": "catalog:",
+    "nyc": "catalog:"
   },
   "karmaDeps": {
     "browserify-istanbul": "^0.2.1",

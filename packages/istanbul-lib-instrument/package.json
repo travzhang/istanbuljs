@@ -11,22 +11,21 @@
     "test": "nyc mocha"
   },
   "dependencies": {
-    "@babel/core": "^7.23.9",
-    "@babel/parser": "^7.23.9",
-    "@istanbuljs/schema": "^0.1.3",
-    "@vitest/istanbul-lib-coverage": "0.0.0",
-    "semver": "^7.5.4"
+    "@babel/core": "catalog:",
+    "@babel/parser": "catalog:",
+    "@istanbuljs/schema": "catalog:",
+    "@vitest/istanbul-lib-coverage": "workspace:*",
+    "semver": "catalog:"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.9",
-    "chai": "^4.2.0",
-    "clone": "^2.1.2",
-    "debug": "^4.1.1",
-    "documentation": "^12.1.4",
-    "js-yaml": "^3.13.1",
-    "mocha": "^6.2.3",
-    "nopt": "^4.0.1",
-    "nyc": "^15.1.0"
+    "@babel/cli": "catalog:",
+    "clone": "catalog:",
+    "debug": "catalog:",
+    "documentation": "catalog:",
+    "js-yaml": "catalog:",
+    "mocha": "catalog:",
+    "nopt": "catalog:",
+    "nyc": "catalog:"
   },
   "license": "MIT",
   "bugs": {
