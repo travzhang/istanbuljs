@@ -18,6 +18,7 @@
     "type": "git",
     "url": "git@github.com:vitest-dev/istanbuljs.git"
   },
+  "type": "module",
   "scripts": {
     "test": "vitest",
     "fmt": "oxfmt",

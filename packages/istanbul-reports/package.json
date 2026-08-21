@@ -19,10 +19,11 @@
     "directory": "packages/istanbul-reports"
   },
   "files": [
-    "index.js",
+    "index.mjs",
     "lib"
   ],
-  "main": "index.js",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
     "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-reports",
     "prepare": "webpack --config lib/html-spa/webpack.config.js --mode production",

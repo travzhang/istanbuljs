@@ -23,7 +23,8 @@
   "files": [
     "src"
   ],
-  "main": "src/index.js",
+  "type": "module",
+  "main": "src/index.mjs",
   "scripts": {
     "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-instrument"
   },

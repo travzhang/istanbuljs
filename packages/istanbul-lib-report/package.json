@@ -22,9 +22,10 @@
   },
   "files": [
     "lib",
-    "index.js"
+    "index.mjs"
   ],
-  "main": "index.js",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
     "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-report"
   },
