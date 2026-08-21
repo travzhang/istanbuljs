@@ -1,7 +1,5 @@
-"use strict";
-/* globals describe, it */
+import { describe, it, assert } from "vitest";
 
-const assert = require("chai").assert;
 const { createContext } = require("..");
 const Context = require("../lib/context");
 const coverageMap = require("./helpers/coverage-map");

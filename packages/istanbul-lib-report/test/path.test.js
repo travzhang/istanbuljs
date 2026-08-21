@@ -1,8 +1,6 @@
-"use strict";
-/* globals describe, it, beforeEach, afterEach */
+import { describe, it, assert, beforeEach, afterEach } from "vitest";
 
 const path = require("path");
-const assert = require("chai").assert;
 const Path = require("../lib/path");
 
 function commonBattery(windows) {

@@ -2,44 +2,41 @@
   "name": "@vitest/istanbul-lib-source-maps",
   "version": "0.0.0",
   "description": "Source maps support for istanbul",
-  "author": "Vitest Team",
-  "main": "index.js",
-  "files": [
-    "lib",
-    "index.js"
+  "keywords": [
+    "istanbul",
+    "maps",
+    "source",
+    "sourcemap",
+    "sourcemaps",
+    "vitest"
   ],
-  "scripts": {
-    "test": "nyc mocha"
-  },
-  "dependencies": {
-    "@jridgewell/trace-mapping": "catalog:",
-    "debug": "catalog:",
-    "@vitest/istanbul-lib-coverage": "workspace:*"
-  },
-  "devDependencies": {
-    "chai": "catalog:",
-    "mocha": "catalog:",
-    "nyc": "catalog:",
-    "ts-node": "catalog:"
-  },
-  "license": "MIT",
+  "homepage": "https://vitest.dev/",
   "bugs": {
     "url": "https://github.com/vitest-dev/vitest/issues"
   },
-  "homepage": "https://vitest.dev/",
+  "license": "MIT",
+  "author": "Vitest Team",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/vitest-dev/istanbuljs.git",
     "directory": "packages/istanbul-lib-source-maps"
   },
-  "keywords": [
-    "istanbul",
-    "vitest",
-    "sourcemaps",
-    "sourcemap",
-    "source",
-    "maps"
+  "files": [
+    "lib",
+    "index.js"
   ],
+  "main": "index.js",
+  "scripts": {
+    "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-source-maps"
+  },
+  "dependencies": {
+    "@jridgewell/trace-mapping": "catalog:",
+    "@vitest/istanbul-lib-coverage": "workspace:*",
+    "debug": "catalog:"
+  },
+  "devDependencies": {
+    "ts-node": "catalog:"
+  },
   "engines": {
     "node": ">=22"
   }

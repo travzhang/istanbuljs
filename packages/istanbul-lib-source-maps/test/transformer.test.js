@@ -1,8 +1,7 @@
-"use strict";
-/* globals describe, it */
+import { describe, it, assert } from "vitest";
+
 const path = require("path");
-const assert = require("chai").assert;
-const createMap = require("istanbul-lib-coverage").createCoverageMap;
+const createMap = require("@vitest/istanbul-lib-coverage").createCoverageMap;
 const { TraceMap } = require("@jridgewell/trace-mapping");
 const { SourceMapTransformer } = require("../lib/transformer");
 

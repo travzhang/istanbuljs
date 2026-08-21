@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const FileWriter = require("istanbul-lib-report/lib/file-writer");
 const istanbulLibReport = require("istanbul-lib-report");
-const istanbulLibCoverage = require("istanbul-lib-coverage");
+const istanbulLibCoverage = require("@vitest/istanbul-lib-coverage");
 const HtmlSpaReport = require("../../lib/html-spa/index");
 
 const assert = require("chai").assert;

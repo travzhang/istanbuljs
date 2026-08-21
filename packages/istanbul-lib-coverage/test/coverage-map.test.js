@@ -1,25 +1,23 @@
-"use strict";
-/* globals describe, it */
+import { describe, it, expect, assert } from "vitest";
 
-const assert = require("chai").assert;
 const { CoverageMap } = require("../lib/coverage-map");
 const { FileCoverage } = require("../lib/file-coverage");
 
 describe("coverage map", () => {
   it("allows a noop constructor", () => {
-    assert.doesNotThrow(() => new CoverageMap());
+    expect(() => new CoverageMap()).not.toThrow();
   });
   it("allows a data object constructor", () => {
-    assert.doesNotThrow(
+    expect(
       () =>
         new CoverageMap({
           "foo.js": new FileCoverage("foo.js").data,
           "bar.js": new FileCoverage("bar.js").data,
         }),
-    );
+    ).not.toThrow();
   });
   it("allows another coverage map in constructor", () => {
-    assert.doesNotThrow(
+    expect(
       () =>
         new CoverageMap(
           new CoverageMap({
@@ -27,7 +25,7 @@ describe("coverage map", () => {
             "bar.js": new FileCoverage("bar.js"),
           }),
         ),
-    );
+    ).not.toThrow();
   });
   it("merges another coverage map into itself", () => {
     const cm1 = new CoverageMap({
@@ -39,8 +37,8 @@ describe("coverage map", () => {
       "baz.js": new FileCoverage("baz.js"),
     });
     cm1.merge(cm2);
-    assert.equal(3, cm1.files().length);
-    assert.deepEqual(["foo.js", "bar.js", "baz.js"], cm1.files());
+    expect(cm1.files()).toHaveLength(3);
+    expect(cm1.files()).toEqual(["foo.js", "bar.js", "baz.js"]);
   });
   it("merges coverage map data into itself", () => {
     const cm1 = new CoverageMap({
@@ -52,17 +50,17 @@ describe("coverage map", () => {
       "baz.js": new FileCoverage("baz.js"),
     }).toJSON();
     cm1.merge(cm2);
-    assert.equal(3, cm1.files().length);
-    assert.deepEqual(["foo.js", "bar.js", "baz.js"], cm1.files());
+    expect(cm1.files()).toHaveLength(3);
+    expect(cm1.files()).toEqual(["foo.js", "bar.js", "baz.js"]);
   });
   it("returns file coverage for file", () => {
     const cm = new CoverageMap({
       "foo.js": new FileCoverage("foo.js"),
       "bar.js": new FileCoverage("bar.js"),
     });
-    assert.ok(cm.fileCoverageFor("foo.js"));
-    assert.ok(cm.fileCoverageFor("bar.js"));
-    assert.throws(() => cm.fileCoverageFor("baz.js"));
+    assert(cm.fileCoverageFor("foo.js"));
+    assert(cm.fileCoverageFor("bar.js"));
+    expect(() => cm.fileCoverageFor("baz.js")).toThrow();
   });
   it("allows addition of new file coverage", () => {
     const cm = new CoverageMap({
@@ -71,17 +69,17 @@ describe("coverage map", () => {
     });
     cm.addFileCoverage(new FileCoverage("foo.js"));
     cm.addFileCoverage(new FileCoverage("baz.js"));
-    assert.equal(3, cm.files().length);
-    assert.deepEqual(["foo.js", "bar.js", "baz.js"], cm.files());
+    expect(cm.files()).toHaveLength(3);
+    expect(cm.files()).toEqual(["foo.js", "bar.js", "baz.js"]);
   });
   it("can filter file coverage", () => {
     const cm = new CoverageMap({
       "foo.js": new FileCoverage("foo.js"),
       "bar.js": new FileCoverage("bar.js"),
     });
-    assert.deepEqual(["foo.js", "bar.js"], cm.files());
+    expect(cm.files()).toEqual(["foo.js", "bar.js"]);
     cm.filter((file) => file === "foo.js");
-    assert.deepEqual(["foo.js"], cm.files());
+    expect(cm.files()).toEqual(["foo.js"]);
   });
   it("returns coverage summary for all files", () => {
     const cm = new CoverageMap({
@@ -91,7 +89,7 @@ describe("coverage map", () => {
     cm.addFileCoverage(new FileCoverage("foo.js"));
     cm.addFileCoverage(new FileCoverage("baz.js"));
     const summary = cm.getCoverageSummary();
-    assert.ok(summary.statements);
-    assert.ok(summary.statements.total === 0);
+    assert(summary.statements);
+    expect(summary.statements.total).toBe(0);
   });
 });

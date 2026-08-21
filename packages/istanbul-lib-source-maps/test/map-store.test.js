@@ -1,8 +1,7 @@
-"use strict";
-/* globals describe, it */
+import { describe, it, assert } from "vitest";
+
 const path = require("path");
-const assert = require("chai").assert;
-const libCoverage = require("istanbul-lib-coverage");
+const libCoverage = require("@vitest/istanbul-lib-coverage");
 const MapStore = require("../lib/map-store").MapStore;
 
 describe("map store", () => {

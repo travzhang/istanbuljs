@@ -2,19 +2,36 @@
   "name": "@vitest/istanbul-lib-instrument",
   "version": "0.0.0",
   "description": "Core istanbul API for JS code coverage",
+  "keywords": [
+    "coverage",
+    "instrumentation",
+    "istanbul",
+    "js",
+    "vitest"
+  ],
+  "homepage": "https://vitest.dev/",
+  "bugs": {
+    "url": "https://github.com/vitest-dev/vitest/issues"
+  },
+  "license": "MIT",
   "author": "Vitest Team",
-  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vitest-dev/istanbuljs.git",
+    "directory": "packages/istanbul-lib-instrument"
+  },
   "files": [
     "src"
   ],
+  "main": "src/index.js",
   "scripts": {
-    "test": "nyc mocha"
+    "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-instrument"
   },
   "dependencies": {
     "@babel/core": "catalog:",
     "@babel/parser": "catalog:",
-    "@jridgewell/trace-mapping": "catalog:",
     "@istanbuljs/schema": "catalog:",
+    "@jridgewell/trace-mapping": "catalog:",
     "@vitest/istanbul-lib-coverage": "workspace:*",
     "semver": "catalog:"
   },
@@ -24,27 +41,8 @@
     "debug": "catalog:",
     "documentation": "catalog:",
     "js-yaml": "catalog:",
-    "mocha": "catalog:",
-    "nopt": "catalog:",
-    "nyc": "catalog:"
+    "nopt": "catalog:"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vitest-dev/vitest/issues"
-  },
-  "homepage": "https://vitest.dev/",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/vitest-dev/istanbuljs.git",
-    "directory": "packages/istanbul-lib-instrument"
-  },
-  "keywords": [
-    "coverage",
-    "istanbul",
-    "vitest",
-    "js",
-    "instrumentation"
-  ],
   "engines": {
     "node": ">=22"
   }

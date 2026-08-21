@@ -1,7 +1,5 @@
-"use strict";
-/* globals describe, it */
+import { describe, it, assert } from "vitest";
 
-const assert = require("chai").assert;
 const index = require("../index");
 
 describe("report interface", () => {

@@ -1,9 +1,8 @@
-/* globals describe, it */
+import { assert, describe, it, expect } from "vitest";
 
 const path = require("path");
 const fs = require("fs");
 const yaml = require("js-yaml");
-const { assert } = require("chai");
 const verifier = require("./util/verifier");
 const guards = require("./util/guards");
 
@@ -61,10 +60,14 @@ function generateTests(docs) {
     describe(skipText + doc.file + "/" + (doc.name || "suite"), () => {
       if (doc.err) {
         it("has errors", () => {
-          assert.ok(false, doc.err);
+          expect.fail(doc.err);
+        });
+      } else if (!doc.tests || !doc.tests.length) {
+        it("generate only test", () => {
+          assert(doc.opts.generateOnly, `Suite ${doc.file} has no tests and is not generateOnly`);
         });
       } else {
-        (doc.tests || []).forEach((t) => {
+        doc.tests.forEach((t) => {
           const fn = async function () {
             const genOnly = (doc.opts || {}).generateOnly;
             const noCoverage = (doc.opts || {}).noCoverage;

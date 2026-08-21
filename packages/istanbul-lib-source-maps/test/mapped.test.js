@@ -1,6 +1,5 @@
-"use strict";
-/* globals describe, it */
-const assert = require("chai").assert;
+import { describe, it, assert } from "vitest";
+
 const MappedCoverage = require("../lib/mapped").MappedCoverage;
 
 describe("mapped coverage", () => {

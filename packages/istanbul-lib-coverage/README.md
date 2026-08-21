@@ -10,7 +10,7 @@ Supersedes `object-utils` and `collector` from the v0 istanbul API.
 See the docs for the full API.
 
 ```js
-var libCoverage = require("istanbul-lib-coverage");
+var libCoverage = require("@vitest/istanbul-lib-coverage");
 var map = libCoverage.createCoverageMap(globalCoverageVar);
 var summary = libCoverage.createCoverageSummary();
 

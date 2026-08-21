@@ -1,7 +1,5 @@
-"use strict";
-/* globals describe, it, beforeEach */
+import { describe, it, assert, beforeEach } from "vitest";
 
-const assert = require("chai").assert;
 const SummarizerFactory = require("../lib/summarizer-factory");
 const coverageMap = require("./helpers/coverage-map");
 

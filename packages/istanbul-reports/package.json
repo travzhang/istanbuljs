@@ -2,58 +2,47 @@
   "name": "@vitest/istanbul-reports",
   "version": "0.0.0",
   "description": "istanbul reports",
-  "author": "Vitest Team",
-  "main": "index.js",
-  "files": [
-    "index.js",
-    "lib"
+  "keywords": [
+    "istanbul",
+    "reports",
+    "vitest"
   ],
-  "scripts": {
-    "test": "nyc mocha --recursive",
-    "prepare": "webpack --config lib/html-spa/webpack.config.js --mode production",
-    "prepare:watch": "webpack --config lib/html-spa/webpack.config.js --watch --mode development"
-  },
-  "dependencies": {
-    "html-escaper": "catalog:",
-    "@vitest/istanbul-lib-report": "workspace:*"
-  },
-  "devDependencies": {
-    "@babel/core": "catalog:",
-    "@babel/preset-env": "catalog:",
-    "@babel/preset-react": "catalog:",
-    "babel-loader": "catalog:",
-    "chai": "catalog:",
-    "is-windows": "catalog:",
-    "@vitest/istanbul-lib-coverage": "workspace:*",
-    "mocha": "catalog:",
-    "nyc": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "webpack": "catalog:",
-    "webpack-cli": "catalog:"
+  "homepage": "https://vitest.dev",
+  "bugs": {
+    "url": "https://github.com/vitest-dev/vitest/issues"
   },
   "license": "MIT",
+  "author": "Vitest Team",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/vitest-dev/istanbuljs.git",
     "directory": "packages/istanbul-reports"
   },
-  "keywords": [
-    "istanbul",
-    "vitest",
-    "reports"
+  "files": [
+    "index.js",
+    "lib"
   ],
-  "bugs": {
-    "url": "https://github.com/vitest-dev/vitest/issues"
+  "main": "index.js",
+  "scripts": {
+    "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-reports",
+    "prepare": "webpack --config lib/html-spa/webpack.config.js --mode production",
+    "prepare:watch": "webpack --config lib/html-spa/webpack.config.js --watch --mode development"
   },
-  "homepage": "https://vitest.dev",
-  "nyc": {
-    "exclude": [
-      "lib/html/assets/**",
-      "lib/html-spa/assets/**",
-      "lib/html-spa/rollup.config.js",
-      "test/**"
-    ]
+  "dependencies": {
+    "@vitest/istanbul-lib-report": "workspace:*",
+    "html-escaper": "catalog:"
+  },
+  "devDependencies": {
+    "@babel/core": "catalog:",
+    "@babel/preset-env": "catalog:",
+    "@babel/preset-react": "catalog:",
+    "@vitest/istanbul-lib-coverage": "workspace:*",
+    "babel-loader": "catalog:",
+    "is-windows": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "webpack": "catalog:",
+    "webpack-cli": "catalog:"
   },
   "engines": {
     "node": ">=22"

@@ -1,11 +1,14 @@
-/* globals it */
+import { it, expect } from "vitest";
 
-const { assert } = require("chai");
 const Instrumenter = require("../src/instrumenter");
 
 function instrument(code, inputSourceMap) {
   const instrumenter = new Instrumenter({ compact: false });
-  const result = instrumenter.instrumentSync(code, __filename, inputSourceMap);
+  const result = instrumenter.instrumentSync(
+    code,
+    new URL(import.meta.url).pathname,
+    inputSourceMap,
+  );
   return {
     code: result,
     coverageData: instrumenter.lastFileCoverage(),
@@ -23,5 +26,5 @@ it("should not alter already instrumented code", () => {
     delete sourceMap.mappings;
     delete sourceMap.names;
   });
-  assert.deepEqual(instrumented, result);
+  expect(instrumented).toEqual(result);
 });

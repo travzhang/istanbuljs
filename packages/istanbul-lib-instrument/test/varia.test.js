@@ -1,13 +1,12 @@
-/* globals describe, it */
+import { assert, describe, it, expect } from "vitest";
 
-const { assert } = require("chai");
 const Instrumenter = require("../src/instrumenter");
 const verifier = require("./util/verifier");
 
 describe("varia", () => {
   it("debug/ walkDebug should not cause errors", async () => {
     const v = verifier.create("output = args[0];", {}, { debug: true });
-    assert.ok(!v.err);
+    assert(!v.err);
     await v.verify(["X"], "X", {
       lines: { 1: 1 },
       statements: { 0: 1 },
@@ -16,7 +15,7 @@ describe("varia", () => {
 
   it("auto-generates filename", async () => {
     const v = verifier.create("output = args[0];", { file: null });
-    assert.ok(!v.err);
+    assert(!v.err);
     await v.verify(["X"], "X", {
       lines: { 1: 1 },
       statements: { 0: 1 },
@@ -25,26 +24,26 @@ describe("varia", () => {
 
   it("handles windows-style paths in file names", async () => {
     const v = verifier.create("output = args[0];", { file: "c:\\x\\y.js" });
-    assert.ok(!v.err);
+    assert(!v.err);
     await v.verify(["X"], "X", {
       lines: { 1: 1 },
       statements: { 0: 1 },
     });
 
     const cov = v.getCoverage();
-    assert.equal(Object.keys(cov)[0], "c:\\x\\y.js");
+    expect(Object.keys(cov)[0]).toBe("c:\\x\\y.js");
   });
 
   it("preserves comments when requested", async () => {
     const v = verifier.create("/* hello */\noutput = args[0];", {}, { preserveComments: true });
-    assert.ok(!v.err);
+    assert(!v.err);
     await v.verify(["X"], "X", {
       lines: { 2: 1 },
       statements: { 0: 1 },
     });
 
     const code = v.getGeneratedCode();
-    assert.ok(code.match(/\/* hello */));
+    assert(code.match(/\/* hello */));
   });
 
   it("preserves function names for named export arrow functions", () => {
@@ -54,10 +53,10 @@ describe("varia", () => {
       { generateOnly: true },
       { esModules: true },
     );
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(code.match(/cov_(.+)\.s\[\d+\]\+\+;export const func=\(\)=>/));
+    assert(code.match(/cov_(.+)\.s\[\d+\]\+\+;export const func=\(\)=>/));
   });
 
   it("honors ignore next for exported functions", () => {
@@ -68,10 +67,10 @@ describe("varia", () => {
       { generateOnly: true },
       { esModules: true, preserveComments: false },
     );
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(
+    assert(
       code.match(
         /return actualCoverage;}cov_[^(]+\(\);export function fn1\(\){}export default function\(\){}/,
       ),
@@ -85,30 +84,33 @@ describe("varia", () => {
       { generateOnly: true },
       { esModules: true },
     );
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(
+    assert(
       code.match(
         /return actualCoverage;}cov_([^(]+)\(\);export function fn1\(\){cov_(.+)\.f\[\d+\]\+\+;}export default function\(\){cov_(.+)\.f\[\d+\]\+\+;}/,
       ),
     );
   });
 
-  it("returns last coverage object", (cb) => {
+  it("returns last coverage object", async () => {
     const instrumenter = new Instrumenter({
       coverageVariable: "__testing_coverage__",
     });
     let err;
     let cov;
 
-    instrumenter.instrument("output = args[0]", __filename, (e) => {
-      err = e;
-      cov = instrumenter.lastFileCoverage();
-      assert.ok(!err);
-      assert.ok(cov);
-      cb();
-    });
+    await new Promise((resolve) =>
+      instrumenter.instrument("output = args[0]", __filename, (e) => {
+        err = e;
+        cov = instrumenter.lastFileCoverage();
+
+        expect(err).toBeFalsy();
+        assert(cov);
+        resolve();
+      }),
+    );
   });
 
   it("creates a source-map when requested", () => {
@@ -119,9 +121,9 @@ describe("varia", () => {
     const instrumenter = new Instrumenter(opts);
     const generated = instrumenter.instrumentSync("output = args[0]", __filename);
 
-    assert.ok(generated);
-    assert.ok(typeof generated === "string");
-    assert.ok(instrumenter.lastSourceMap());
+    assert(generated);
+    expect(generated).toBeTypeOf("string");
+    assert(instrumenter.lastSourceMap());
   });
 
   it("registers source map URLs seen in the original source", () => {
@@ -141,26 +143,28 @@ describe("varia", () => {
       __filename,
     );
 
-    assert.ok(generated);
-    assert.equal(f, __filename);
-    assert.equal(u, "foo.map");
+    assert(generated);
+    expect(f).toEqual(__filename);
+    expect(u).toEqual("foo.map");
   });
 
   describe("callback style instrumentation", () => {
-    it("allows filename to be optional", (cb) => {
+    it("allows filename to be optional", async () => {
       const instrumenter = new Instrumenter({
         coverageVariable: "__testing_coverage__",
       });
       let generated;
       let err;
 
-      instrumenter.instrument("output = args[0]", (e, c) => {
-        err = e;
-        generated = c;
-        assert.ok(!err);
-        assert.ok(generated);
-        cb();
-      });
+      await new Promise((resolve) =>
+        instrumenter.instrument("output = args[0]", (e, c) => {
+          err = e;
+          generated = c;
+          expect(err).toBeFalsy();
+          assert(generated);
+          resolve();
+        }),
+      );
     });
     it("returns instead of throwing errors", () => {
       const instrumenter = new Instrumenter({
@@ -173,8 +177,8 @@ describe("varia", () => {
         err = e;
         generated = c;
       });
-      assert.ok(err);
-      assert.ok(!generated);
+      assert(err);
+      assert(!generated);
     });
   });
 
@@ -187,10 +191,10 @@ describe("varia", () => {
       { generateOnly: true },
       { esModules: true },
     );
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(code.match(/return actualCoverage;}cov_[^(]+\(\);export class App extends/));
+    assert(code.match(/return actualCoverage;}cov_[^(]+\(\);export class App extends/));
   });
 
   it("declares Function when needed", () => {
@@ -199,10 +203,10 @@ describe("varia", () => {
       { generateOnly: true },
       { esModules: true },
     );
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(code.match(/var Function\s*=/));
+    assert(code.match(/var Function\s*=/));
   });
 
   it("does not declare Function when not needed", () => {
@@ -211,30 +215,30 @@ describe("varia", () => {
       { generateOnly: true },
       { esModules: true },
     );
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(!code.match(/var Function\s*=/));
+    assert(!code.match(/var Function\s*=/));
   });
 
   it("does not add extra parenthesis when superclass is an identifier", () => {
     const v = verifier.create("class App extends Component {};", {
       generateOnly: true,
     });
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(code.match(/return actualCoverage;}cov_[^(]+\(\);class App extends Component/));
+    assert(code.match(/return actualCoverage;}cov_[^(]+\(\);class App extends Component/));
   });
 
   it("can store coverage object in alternative scope", () => {
     const opts = { generateOnly: true };
     const instrumentOpts = { coverageGlobalScope: "window.top" };
     const v = verifier.create('console.log("test");', opts, instrumentOpts);
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(code.match(/global\s*=\s*\(*new\s*Function\(['"]return\s*window.top['"]\)\)*\(\)/));
+    assert(code.match(/global\s*=\s*\(*new\s*Function\(['"]return\s*window.top['"]\)\)*\(\)/));
   });
 
   it("can store coverage object in alternative scope without function", () => {
@@ -244,9 +248,9 @@ describe("varia", () => {
       coverageGlobalScopeFunc: false,
     };
     const v = verifier.create('console.log("test");', opts, instrumentOpts);
-    assert.ok(!v.err);
+    assert(!v.err);
 
     const code = v.getGeneratedCode();
-    assert.ok(code.match(/global\s*=\s*window.top;/));
+    assert(code.match(/global\s*=\s*window.top;/));
   });
 });

@@ -1,7 +1,5 @@
-"use strict";
-/* globals describe, it, beforeEach */
+import { describe, it, assert, beforeEach } from "vitest";
 
-const assert = require("chai").assert;
 const { BaseTree, BaseNode, Visitor, CompositeVisitor } = require("../lib/tree");
 
 class TestNode extends BaseNode {

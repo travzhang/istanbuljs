@@ -4,7 +4,7 @@
  */
 "use strict";
 
-const coverage = require("istanbul-lib-coverage");
+const coverage = require("@vitest/istanbul-lib-coverage");
 const Path = require("./path");
 const { BaseNode, BaseTree } = require("./tree");
 

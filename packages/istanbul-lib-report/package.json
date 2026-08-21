@@ -2,14 +2,31 @@
   "name": "@vitest/istanbul-lib-report",
   "version": "3.0.1",
   "description": "Base reporting library for istanbul",
+  "keywords": [
+    "api",
+    "istanbul",
+    "lib",
+    "report",
+    "vitest"
+  ],
+  "homepage": "https://vitest.dev",
+  "bugs": {
+    "url": "https://github.com/vitest-dev/vitest/issues"
+  },
+  "license": "MIT",
   "author": "Vitest Team",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vitest-dev/istanbuljs.git",
+    "directory": "packages/istanbul-lib-report"
+  },
   "files": [
     "lib",
     "index.js"
   ],
+  "main": "index.js",
   "scripts": {
-    "test": "nyc mocha"
+    "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-report"
   },
   "dependencies": {
     "@vitest/istanbul-lib-coverage": "workspace:*",
@@ -17,28 +34,8 @@
     "supports-color": "catalog:"
   },
   "devDependencies": {
-    "chai": "catalog:",
-    "mocha": "catalog:",
-    "nyc": "catalog:",
     "rimraf": "catalog:"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vitest-dev/vitest/issues"
-  },
-  "homepage": "https://vitest.dev",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/vitest-dev/istanbuljs.git",
-    "directory": "packages/istanbul-lib-report"
-  },
-  "keywords": [
-    "istanbul",
-    "vitest",
-    "report",
-    "api",
-    "lib"
-  ],
   "engines": {
     "node": ">=22"
   }

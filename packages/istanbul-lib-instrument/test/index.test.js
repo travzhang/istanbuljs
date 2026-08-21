@@ -1,24 +1,21 @@
-/* globals describe, it */
-const { assert } = require("chai");
+import { assert, describe, it, expect } from "vitest";
+
 const index = require("../src/index");
 
 describe("external interface", () => {
   it("exposes the correct objects", () => {
     const i = index.createInstrumenter();
-    assert.ok(i);
-    assert.ok(i.instrumentSync);
-    assert.ok(i.instrument);
+    assert(i);
+    assert(i.instrumentSync);
+    assert(i.instrument);
     const pc = index.programVisitor;
-    assert.ok(pc);
-    assert.isFunction(pc);
+    assert(pc);
+    expect(pc).toBeTypeOf("function");
   });
 });
 
 describe("instrumenter", () => {
   it("should remove comments when asked to", function () {
-    // This test has frequent timeout on Windows.
-    this.timeout(5000);
-
     const instrumenter = index.createInstrumenter({
       preserveComments: false,
     });

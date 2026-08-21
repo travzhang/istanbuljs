@@ -1,6 +1,5 @@
-/* globals describe, it, context */
+import { assert, describe, it, expect } from "vitest";
 
-const { assert } = require("chai");
 const Instrumenter = require("../src/instrumenter");
 
 const codeWithImportAttribute = `
@@ -19,30 +18,30 @@ const generateCode = (code, parserPlugins, generatorOpts) => {
 };
 
 describe("generatorOpts", () => {
-  context("when the code has import attributes", () => {
-    context('using "with" importAttributesKeyword', () => {
+  describe("when the code has import attributes", () => {
+    describe('using "with" importAttributesKeyword', () => {
       it("should produce configured keyword", () => {
         const generated = generateCode(
           codeWithImportAttribute,
           [["importAttributes", { deprecatedAssertSyntax: true }]],
           { importAttributesKeyword: "with" },
         );
-        assert.ok(generated);
-        assert.ok(typeof generated === "string");
-        assert.ok(generated.includes("with{type:'json'}"));
+        assert(generated);
+        assert(typeof generated === "string");
+        assert(generated.includes("with{type:'json'}"));
       });
     });
 
-    context('using "assert" importAttributesKeyword', () => {
+    describe('using "assert" importAttributesKeyword', () => {
       it("should produce configured keyword", () => {
         const generated = generateCode(
           codeWithImportAttribute,
           [["importAttributes", { deprecatedAssertSyntax: true }]],
           { importAttributesKeyword: "assert" },
         );
-        assert.ok(generated);
-        assert.ok(typeof generated === "string");
-        assert.ok(generated.includes("assert{type:'json'}"));
+        assert(generated);
+        assert(typeof generated === "string");
+        assert(generated.includes("assert{type:'json'}"));
       });
     });
   });

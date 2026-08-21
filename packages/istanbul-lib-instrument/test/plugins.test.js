@@ -1,6 +1,5 @@
-/* globals describe, it, context */
+import { assert, describe, it, expect } from "vitest";
 
-const { assert } = require("chai");
 const Instrumenter = require("../src/instrumenter");
 
 const codeNeedDecoratorPlugin = `
@@ -19,25 +18,20 @@ const generateCode = (code, parserPlugins) => {
 };
 
 describe("plugins", () => {
-  context("when the code has a decorator", () => {
-    context("without decorator plugin", () => {
-      it("should fail", (done) => {
-        try {
-          generateCode(codeNeedDecoratorPlugin);
-        } catch (e) {
-          assert.ok(e);
-          done();
-        }
+  describe("when the code has a decorator", () => {
+    describe("without decorator plugin", () => {
+      it("should fail", () => {
+        expect(() => generateCode(codeNeedDecoratorPlugin)).toThrow();
       });
     });
 
-    context("with decorator plugin", () => {
+    describe("with decorator plugin", () => {
       it("should success", () => {
         const generated = generateCode(codeNeedDecoratorPlugin, [
           ["decorators", { decoratorsBeforeExport: false }],
         ]);
-        assert.ok(generated);
-        assert.ok(typeof generated === "string");
+        assert(generated);
+        expect(generated).toBeTypeOf("string");
       });
     });
   });

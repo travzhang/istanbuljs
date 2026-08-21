@@ -1,7 +1,5 @@
-"use strict";
-/* globals describe, it */
+import { describe, it, expect, assert } from "vitest";
 
-const assert = require("chai").assert;
 const {
   FileCoverage,
   addHits,
@@ -13,25 +11,25 @@ const { CoverageSummary } = require("../lib/coverage-summary");
 describe("coverage summary", () => {
   it("allows a noop constructor", () => {
     const cs = new CoverageSummary();
-    assert.ok(cs.statements);
-    assert.ok(cs.lines);
-    assert.ok(cs.functions);
-    assert.ok(cs.branches);
-    assert.ok(cs.branchesTrue);
+    assert(cs.statements);
+    assert(cs.lines);
+    assert(cs.functions);
+    assert(cs.branches);
+    assert(cs.branchesTrue);
   });
 
   it("allows another summary in constructor", () => {
     const cs1 = new CoverageSummary();
-    assert.doesNotThrow(() => {
+    expect(() => {
       new CoverageSummary(cs1);
-    });
+    }).not.toThrow();
   });
 
   it("allows summary data in constructor", () => {
     const cs1 = new CoverageSummary();
-    assert.doesNotThrow(() => {
+    expect(() => {
       new CoverageSummary(cs1.data);
-    });
+    }).not.toThrow();
   });
 
   it("can be initialized with non-zero totals", () => {
@@ -41,7 +39,7 @@ describe("coverage summary", () => {
     cs.statements.skipped = 0;
     cs.statements.pct = 80;
     const cs2 = new CoverageSummary(cs);
-    assert.deepEqual(cs2.statements, {
+    expect(cs2.statements).toEqual({
       total: 5,
       covered: 4,
       skipped: 0,
@@ -50,9 +48,9 @@ describe("coverage summary", () => {
   });
 
   it("cannot be initialized with an object with missing keys", () => {
-    assert.throws(() => {
+    expect(() => {
       new CoverageSummary({ statements: {} });
-    });
+    }).toThrow();
   });
 
   it("merges summaries correctly", () => {
@@ -88,69 +86,69 @@ describe("coverage summary", () => {
     });
     cs2.statements.covered = 5;
     cs1.merge(cs2);
-    assert.deepEqual(cs1.statements, {
+    expect(cs1.statements).toEqual({
       total: 10,
       covered: 9,
       skipped: 0,
       pct: 90,
     });
-    assert.equal(cs1.branches.pct, 100);
-    assert.equal(cs1.branchesTrue.pct, 100);
+    expect(cs1.branches.pct).toBe(100);
+    expect(cs1.branchesTrue.pct).toBe(100);
     const data = JSON.parse(JSON.stringify(cs1));
-    assert.deepEqual(data.statements, {
+    expect(data.statements).toEqual({
       total: 10,
       covered: 9,
       skipped: 0,
       pct: 90,
     });
-    assert.equal(data.branches.pct, 100);
-    assert.equal(data.branchesTrue.pct, 100);
+    expect(data.branches.pct).toBe(100);
+    expect(data.branchesTrue.pct).toBe(100);
   });
 
   it("isEmpty() by default", () => {
     const cs = new CoverageSummary();
-    assert.equal(cs.isEmpty(), true);
+    expect(cs.isEmpty()).toBe(true);
   });
 });
 
 describe("base coverage", () => {
   it("does not allow a noop/ invalid constructor", () => {
-    assert.throws(() => {
+    expect(() => {
       new FileCoverage();
-    });
-    assert.throws(() => {
+    }).toThrow();
+    expect(() => {
       new FileCoverage(10);
-    });
+    }).toThrow();
   });
 
   it("allows a path in constructor", () => {
     let bc = null;
-    assert.doesNotThrow(() => {
+    expect(() => {
       bc = new FileCoverage("/path/to/file");
-    });
-    assert.ok(bc.statementMap);
-    assert.ok(bc.fnMap);
-    assert.ok(bc.branchMap);
-    assert.ok(bc.s);
-    assert.ok(bc.f);
-    assert.ok(bc.b);
-    assert.ok(bc.getLineCoverage());
-    assert.equal(bc.path, "/path/to/file");
+    }).not.toThrow();
+    assert(bc.statementMap);
+    assert(bc.fnMap);
+    assert(bc.branchMap);
+    assert(bc.s);
+    assert(bc.f);
+    assert(bc.b);
+    assert(bc.getLineCoverage());
+    expect(bc.path).toBe("/path/to/file");
   });
 
   it("allows another object in constructor, produces JSON", () => {
     const bc1 = new FileCoverage("/path/to/file");
     const bc2 = new FileCoverage(bc1);
-    assert.equal(bc2.path, "/path/to/file");
+    expect(bc2.path).toBe("/path/to/file");
 
     const bc3 = new FileCoverage(bc1.data);
-    assert.equal(bc3.path, "/path/to/file");
-    assert.deepEqual(bc1.data, JSON.parse(JSON.stringify(bc3)));
+    expect(bc3.path).toBe("/path/to/file");
+    expect(bc1.data).toEqual(JSON.parse(JSON.stringify(bc3)));
 
     delete bc3.data.s;
-    assert.throws(() => {
+    expect(() => {
       new FileCoverage(bc3.data);
-    });
+    }).toThrow();
   });
 
   it("merges another file coverage correctly", () => {
@@ -210,26 +208,26 @@ describe("base coverage", () => {
     c2.f[0] = 1;
     c2.b[0][1] = 2;
     summary = c1.toSummary();
-    assert.ok(summary instanceof CoverageSummary);
-    assert.deepEqual(summary.statements, {
+    expect(summary).toBeInstanceOf(CoverageSummary);
+    expect(summary.statements).toEqual({
       total: 4,
       covered: 1,
       skipped: 0,
       pct: 25,
     });
-    assert.deepEqual(summary.lines, {
+    expect(summary.lines).toEqual({
       total: 2,
       covered: 1,
       skipped: 0,
       pct: 50,
     });
-    assert.deepEqual(summary.functions, {
+    expect(summary.functions).toEqual({
       total: 1,
       covered: 1,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.branches, {
+    expect(summary.branches).toEqual({
       total: 2,
       covered: 1,
       skipped: 0,
@@ -238,36 +236,36 @@ describe("base coverage", () => {
 
     c1.merge(c2);
     summary = c1.toSummary();
-    assert.deepEqual(summary.statements, {
+    expect(summary.statements).toEqual({
       total: 4,
       covered: 2,
       skipped: 0,
       pct: 50,
     });
-    assert.deepEqual(summary.lines, {
+    expect(summary.lines).toEqual({
       total: 2,
       covered: 2,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.functions, {
+    expect(summary.functions).toEqual({
       total: 1,
       covered: 1,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.branches, {
+    expect(summary.branches).toEqual({
       total: 2,
       covered: 2,
       skipped: 0,
       pct: 100,
     });
 
-    assert.equal(c1.s[0], 1);
-    assert.equal(c1.s[1], 1);
-    assert.equal(c1.f[0], 2);
-    assert.equal(c1.b[0][0], 1);
-    assert.equal(c1.b[0][1], 2);
+    expect(c1.s[0]).toBe(1);
+    expect(c1.s[1]).toBe(1);
+    expect(c1.f[0]).toBe(2);
+    expect(c1.b[0][0]).toBe(1);
+    expect(c1.b[0][1]).toBe(2);
   });
 
   it("merges another file coverage with different starting indices", () => {
@@ -362,26 +360,26 @@ describe("base coverage", () => {
     c2.f[1] = 1;
     c2.b[1][1] = 2;
     summary = c1.toSummary();
-    assert.ok(summary instanceof CoverageSummary);
-    assert.deepEqual(summary.statements, {
+    expect(summary).toBeInstanceOf(CoverageSummary);
+    expect(summary.statements).toEqual({
       total: 4,
       covered: 1,
       skipped: 0,
       pct: 25,
     });
-    assert.deepEqual(summary.lines, {
+    expect(summary.lines).toEqual({
       total: 2,
       covered: 1,
       skipped: 0,
       pct: 50,
     });
-    assert.deepEqual(summary.functions, {
+    expect(summary.functions).toEqual({
       total: 1,
       covered: 1,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.branches, {
+    expect(summary.branches).toEqual({
       total: 2,
       covered: 1,
       skipped: 0,
@@ -390,36 +388,36 @@ describe("base coverage", () => {
 
     c1.merge(c2);
     summary = c1.toSummary();
-    assert.deepEqual(summary.statements, {
+    expect(summary.statements).toEqual({
       total: 4,
       covered: 2,
       skipped: 0,
       pct: 50,
     });
-    assert.deepEqual(summary.lines, {
+    expect(summary.lines).toEqual({
       total: 2,
       covered: 2,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.functions, {
+    expect(summary.functions).toEqual({
       total: 1,
       covered: 1,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.branches, {
+    expect(summary.branches).toEqual({
       total: 2,
       covered: 2,
       skipped: 0,
       pct: 100,
     });
 
-    assert.equal(c1.s[0], 1);
-    assert.equal(c1.s[1], 1);
-    assert.equal(c1.f[0], 2);
-    assert.equal(c1.b[0][0], 1);
-    assert.equal(c1.b[0][1], 2);
+    expect(c1.s[0]).toBe(1);
+    expect(c1.s[1]).toBe(1);
+    expect(c1.f[0]).toBe(2);
+    expect(c1.b[0][0]).toBe(1);
+    expect(c1.b[0][1]).toBe(2);
   });
 
   it("drops all data during merges", () => {
@@ -484,10 +482,10 @@ describe("base coverage", () => {
     // Get non-all data regardless of merge order
     let cov = createCoverage(true);
     cov.merge(createCoverage());
-    assert.deepEqual(cov.data, expected);
+    expect(cov.data).toEqual(expected);
     cov = createCoverage();
     cov.merge(createCoverage(true));
-    assert.deepEqual(cov.data, expected);
+    expect(cov.data).toEqual(expected);
   });
 
   it("merges another file coverage that tracks logical truthiness", () => {
@@ -552,26 +550,26 @@ describe("base coverage", () => {
     c2.b[0][1] = 2;
     c2.bT[0][1] = 2;
     summary = c1.toSummary();
-    assert.ok(summary instanceof CoverageSummary);
-    assert.deepEqual(summary.statements, {
+    expect(summary).toBeInstanceOf(CoverageSummary);
+    expect(summary.statements).toEqual({
       total: 4,
       covered: 1,
       skipped: 0,
       pct: 25,
     });
-    assert.deepEqual(summary.lines, {
+    expect(summary.lines).toEqual({
       total: 2,
       covered: 1,
       skipped: 0,
       pct: 50,
     });
-    assert.deepEqual(summary.functions, {
+    expect(summary.functions).toEqual({
       total: 1,
       covered: 1,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.branches, {
+    expect(summary.branches).toEqual({
       total: 2,
       covered: 1,
       skipped: 0,
@@ -580,38 +578,38 @@ describe("base coverage", () => {
 
     c1.merge(c2);
     summary = c1.toSummary();
-    assert.deepEqual(summary.statements, {
+    expect(summary.statements).toEqual({
       total: 4,
       covered: 2,
       skipped: 0,
       pct: 50,
     });
-    assert.deepEqual(summary.lines, {
+    expect(summary.lines).toEqual({
       total: 2,
       covered: 2,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.functions, {
+    expect(summary.functions).toEqual({
       total: 1,
       covered: 1,
       skipped: 0,
       pct: 100,
     });
-    assert.deepEqual(summary.branches, {
+    expect(summary.branches).toEqual({
       total: 2,
       covered: 2,
       skipped: 0,
       pct: 100,
     });
 
-    assert.equal(c1.s[0], 1);
-    assert.equal(c1.s[1], 1);
-    assert.equal(c1.f[0], 2);
-    assert.equal(c1.b[0][0], 1);
-    assert.equal(c1.b[0][1], 2);
-    assert.equal(c1.bT[0][0], 1);
-    assert.equal(c1.bT[0][1], 2);
+    expect(c1.s[0]).toBe(1);
+    expect(c1.s[1]).toBe(1);
+    expect(c1.f[0]).toBe(2);
+    expect(c1.b[0][0]).toBe(1);
+    expect(c1.b[0][1]).toBe(2);
+    expect(c1.bT[0][0]).toBe(1);
+    expect(c1.bT[0][1]).toBe(2);
   });
 
   it("merges another file with non-overlapping branch misses", () => {
@@ -885,7 +883,7 @@ describe("base coverage", () => {
     c1.merge(c2);
     c1.merge(new FileCoverage(clone(c1data)));
     c1.merge(new FileCoverage(clone(c2data)));
-    assert.deepEqual(c1.toSummary().data, {
+    expect(c1.toSummary().data).toEqual({
       lines: { total: 15, covered: 15, skipped: 0, pct: 100 },
       functions: { total: 1, covered: 1, skipped: 0, pct: 100 },
       statements: { total: 15, covered: 15, skipped: 0, pct: 100 },
@@ -939,14 +937,14 @@ describe("base coverage", () => {
       },
     });
     fc.resetHits();
-    assert.deepEqual({ 1: 0, 2: 0, 3: 0, 4: 0 }, fc.s);
-    assert.deepEqual({ 1: 0 }, fc.f);
-    assert.deepEqual({ 1: [0, 0] }, fc.b);
-    assert.deepEqual({ 1: [0, 0] }, fc.bT);
+    expect({ 1: 0, 2: 0, 3: 0, 4: 0 }).toEqual(fc.s);
+    expect({ 1: 0 }).toEqual(fc.f);
+    expect({ 1: [0, 0] }).toEqual(fc.b);
+    expect({ 1: [0, 0] }).toEqual(fc.bT);
     // does not throw if bT missing
     fc.data.bT = undefined;
     fc.resetHits();
-    assert.equal(fc.bT, undefined);
+    expect(fc.bT).toBeUndefined();
   });
 
   it("returns uncovered lines", () => {
@@ -972,7 +970,7 @@ describe("base coverage", () => {
       b: {},
       f: {},
     });
-    assert.deepEqual(["2"], c.getUncoveredLines());
+    expect(["2"]).toEqual(c.getUncoveredLines());
   });
 
   it("returns branch coverage by line", () => {
@@ -992,21 +990,18 @@ describe("base coverage", () => {
       f: {},
     });
     const bcby = c.getBranchCoverageByLine();
-    assert.deepEqual(
-      {
-        1: {
-          covered: 1,
-          total: 2,
-          coverage: 50,
-        },
-        2: {
-          covered: 1,
-          total: 4,
-          coverage: 25,
-        },
+    expect({
+      1: {
+        covered: 1,
+        total: 2,
+        coverage: 50,
       },
-      bcby,
-    );
+      2: {
+        covered: 1,
+        total: 4,
+        coverage: 25,
+      },
+    }).toEqual(bcby);
   });
 
   it("returns branch coverage by line with Cobertura branchMap structure", () => {
@@ -1032,36 +1027,33 @@ describe("base coverage", () => {
       f: {},
     });
     const bcby = c.getBranchCoverageByLine();
-    assert.deepEqual(
-      {
-        1: {
-          covered: 1,
-          total: 2,
-          coverage: 50,
-        },
-        2: {
-          covered: 1,
-          total: 4,
-          coverage: 25,
-        },
+    expect({
+      1: {
+        covered: 1,
+        total: 2,
+        coverage: 50,
       },
-      bcby,
-    );
+      2: {
+        covered: 1,
+        total: 4,
+        coverage: 25,
+      },
+    }).toEqual(bcby);
   });
 
   it("allows file coverage to be initialized with tracking for logical truthiness", () => {
     let fcov = new FileCoverage("foo.json");
-    assert.notOk(fcov.data.bT);
+    expect(fcov.data.bT).toBeFalsy();
     fcov = new FileCoverage("foo.json", true);
-    assert.ok(fcov.data.bT);
-    assert.ok(fcov.toSummary().branchesTrue);
+    assert(fcov.data.bT);
+    assert(fcov.toSummary().branchesTrue);
   });
 });
 
 describe("addHits unit coverage", () => {
-  it("adds numbers", () => assert.equal(addHits(1, 2), 3));
-  it("adds arrays", () => assert.deepEqual(addHits([1, 2], [2, 3]), [3, 5]));
-  it("nulls invalid input", () => assert.equal(addHits(1, [2]), null));
+  it("adds numbers", () => expect(addHits(1, 2)).toBe(3));
+  it("adds arrays", () => expect(addHits([1, 2], [2, 3])).toEqual([3, 5]));
+  it("nulls invalid input", () => expect(addHits(1, [2])).toBeNull());
 });
 
 describe("findNearestContainer unit coverage", () => {
@@ -1085,8 +1077,8 @@ describe("findNearestContainer unit coverage", () => {
       // will behave properly if ranges are out of order.
       7: loc(2, 3, 90, 0),
     };
-    assert.equal(findNearestContainer(item1, map), "4");
-    assert.equal(findNearestContainer(item2, map), "6");
+    expect(findNearestContainer(item1, map)).toBe("4");
+    expect(findNearestContainer(item2, map)).toBe("6");
   });
 });
 
@@ -1116,8 +1108,8 @@ describe("addNearestContainerHits unit coverage", () => {
       5: 5,
       6: 6,
     };
-    assert.equal(addNearestContainerHits(item, 10, map, hits), 14);
-    assert.equal(addNearestContainerHits(loc(1000, 4, 10010, 1234), 10, map, hits), 10);
+    expect(addNearestContainerHits(item, 10, map, hits)).toBe(14);
+    expect(addNearestContainerHits(loc(1000, 4, 10010, 1234), 10, map, hits)).toBe(10);
   });
 });
 
@@ -1133,7 +1125,8 @@ describe("findNearestContainer missing loc defense", () => {
       2: loc(10, 10, 50, 50),
       3: { loc: loc(20, 20, 40, 40) },
     };
-    assert.equal(findNearestContainer({ no: "loc" }, map), null);
-    assert.equal(findNearestContainer(loc(30, 30, 35, 35), "3"));
+
+    expect(findNearestContainer({ no: "loc" }, map)).toBeNull();
+    expect(findNearestContainer(loc(30, 30, 35, 35), "3")).toBe(null);
   });
 });

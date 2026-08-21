@@ -5,7 +5,7 @@ const path = require("path");
 const isWindows = require("is-windows");
 const FileWriter = require("istanbul-lib-report/lib/file-writer");
 const istanbulLibReport = require("istanbul-lib-report");
-const istanbulLibCoverage = require("istanbul-lib-coverage");
+const istanbulLibCoverage = require("@vitest/istanbul-lib-coverage");
 const LcovOnlyReport = require("../../lib/lcovonly/index");
 
 require("chai").should();

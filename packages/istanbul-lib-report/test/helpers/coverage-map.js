@@ -1,6 +1,6 @@
 "use strict";
 
-const coverage = require("istanbul-lib-coverage");
+const coverage = require("@vitest/istanbul-lib-coverage");
 
 function makeCoverage(filePath, numStatements, numCovered) {
   const fc = {

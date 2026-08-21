@@ -1,7 +1,7 @@
 "use strict";
 /* globals describe, it */
 const fs = require("fs");
-const istanbulLibCoverage = require("istanbul-lib-coverage");
+const istanbulLibCoverage = require("@vitest/istanbul-lib-coverage");
 const annotator = require("../../lib/html/annotator");
 
 require("chai").should();
@@ -86,13 +86,13 @@ describe("annotator", () => {
     it("handles implicit else branches", () => {
       const annotated = annotator(getFixture("github-649"), {
         getSource() {
-          return `exports.testy = function () { 
+          return `exports.testy = function () {
                         let a = 0;
-                      
+
                         if (!a) {
                           a = 3;
                         }
-                    
+
                         return a;
                     };`;
         },

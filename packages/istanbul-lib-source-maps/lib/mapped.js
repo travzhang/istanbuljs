@@ -4,7 +4,7 @@
  */
 "use strict";
 
-const { FileCoverage } = require("istanbul-lib-coverage").classes;
+const { FileCoverage } = require("@vitest/istanbul-lib-coverage").classes;
 
 function locString(loc) {
   return [loc.start.line, loc.start.column, loc.end.line, loc.end.column].join(":");

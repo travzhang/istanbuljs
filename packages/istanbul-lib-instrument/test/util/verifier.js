@@ -1,4 +1,4 @@
-const { classes } = require("istanbul-lib-coverage");
+const { classes } = require("@vitest/istanbul-lib-coverage");
 const { assert } = require("chai");
 const clone = require("clone");
 const Instrumenter = require("../../src/instrumenter");

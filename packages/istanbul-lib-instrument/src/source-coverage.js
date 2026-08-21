@@ -1,4 +1,4 @@
-const { classes } = require("istanbul-lib-coverage");
+const { classes } = require("@vitest/istanbul-lib-coverage");
 
 function cloneLocation(loc) {
   return {

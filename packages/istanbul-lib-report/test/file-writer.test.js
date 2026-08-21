@@ -1,9 +1,7 @@
-"use strict";
-/* globals describe, it, beforeEach, afterEach */
+import { describe, it, assert, beforeEach, afterEach } from "vitest";
 
 const fs = require("fs");
 const path = require("path");
-const assert = require("chai").assert;
 const mkdirp = require("make-dir");
 const rimraf = require("rimraf");
 const FileWriter = require("../lib/file-writer");

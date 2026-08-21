@@ -3,35 +3,32 @@
   "version": "0.0.0",
   "private": true,
   "description": "Code Coverage utilities for Vitest and other modern testing frameworks",
-  "packageManager": "pnpm@11.22.0",
-  "scripts": {
-    "test": "cross-env NODE_ENV=test nyc mocha --timeout 30000 packages/*/test{,/*}.js",
-    "fmt": "oxfmt",
-    "lint": "oxlint"
+  "keywords": [
+    "coverage",
+    "istanbuljs",
+    "vitest"
+  ],
+  "homepage": "https://vitest.dev/",
+  "bugs": {
+    "url": "https://github.com/vitest-dev/vitest/issues"
   },
+  "license": "MIT",
+  "author": "Vitest Team",
   "repository": {
     "type": "git",
     "url": "git@github.com:vitest-dev/istanbuljs.git"
   },
-  "keywords": [
-    "istanbuljs",
-    "vitest",
-    "coverage"
-  ],
-  "author": "Vitest Team",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vitest-dev/vitest/issues"
+  "scripts": {
+    "test": "vitest",
+    "fmt": "oxfmt",
+    "lint": "oxlint"
   },
-  "homepage": "https://vitest.dev/",
   "devDependencies": {
-    "coveralls": "catalog:",
-    "cross-env": "catalog:",
-    "glob": "catalog:",
-    "mocha": "catalog:",
-    "nyc": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
     "oxfmt": "catalog:",
-    "oxlint": "catalog:"
+    "oxlint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "nyc": {
     "reporter": [
@@ -41,5 +38,6 @@
   },
   "engines": {
     "node": ">=22"
-  }
+  },
+  "packageManager": "pnpm@11.22.0"
 }

@@ -5,7 +5,7 @@
 "use strict";
 
 const debug = require("debug")("istanbuljs");
-const libCoverage = require("istanbul-lib-coverage");
+const libCoverage = require("@vitest/istanbul-lib-coverage");
 const { MappedCoverage } = require("./mapped");
 const getMapping = require("./get-mapping");
 const { getUniqueKey, getOutput } = require("./transform-utils");

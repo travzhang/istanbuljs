@@ -1,6 +1,5 @@
-"use strict";
-/* globals describe, it, beforeEach */
-const assert = require("chai").assert;
+import { describe, it, assert, beforeEach } from "vitest";
+
 const InsertionText = require("../../lib/html/insertion-text");
 
 describe("insertion text", () => {
