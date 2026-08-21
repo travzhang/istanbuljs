@@ -1,8 +1,8 @@
 {
-  "name": "istanbuljs",
-  "version": "2.0.0",
+  "name": "@vitest/istanbuljs-monorepo",
+  "version": "0.0.0",
   "private": true,
-  "description": "monorepo containing the various nuts and bolts that facilitate istanbul.js test instrumentation",
+  "description": "Code Coverage utilities for Vitest and other modern testing frameworks",
   "scripts": {
     "test": "cross-env NODE_ENV=test nyc mocha --timeout 30000 packages/*/test{,/*}.js",
     "posttest": "eslint .",
@@ -11,19 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:istanbuljs/istanbuljs.git"
+    "url": "git@github.com:vitest-dev/istanbuljs.git"
   },
   "keywords": [
     "istanbuljs",
-    "coverage",
-    "nyc"
+    "vitest",
+    "coverage"
   ],
-  "author": "Ben Coe <ben@npmjs.com>",
-  "license": "ISC",
+  "author": "Vitest Team",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/istanbuljs/istanbuljs/issues"
+    "url": "https://github.com/vitest-dev/vitest/issues"
   },
-  "homepage": "https://github.com/istanbuljs/istanbuljs",
+  "homepage": "https://vitest.dev/",
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "coveralls": "^3.0.9",

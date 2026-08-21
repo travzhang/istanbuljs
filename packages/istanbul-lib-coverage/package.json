@@ -1,8 +1,8 @@
 {
-  "name": "istanbul-lib-coverage",
-  "version": "3.2.2",
+  "name": "@vitest/istanbul-lib-coverage",
+  "version": "0.0.0",
   "description": "Data library for istanbul coverage objects",
-  "author": "Krishnan Anantheswaran <kananthmail-github@yahoo.com>",
+  "author": "Vitest Team",
   "main": "index.js",
   "files": [
     "lib",
@@ -28,19 +28,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/istanbuljs/istanbuljs.git",
+    "url": "git+ssh://git@github.com/vitest-dev/istanbuljs.git",
     "directory": "packages/istanbul-lib-coverage"
   },
   "keywords": [
     "istanbul",
+    "vitest",
     "coverage",
     "data"
   ],
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/istanbuljs/istanbuljs/issues"
+    "url": "https://github.com/vitest-dev/vitest/issues"
   },
-  "homepage": "https://istanbul.js.org/",
+  "homepage": "https://vitest.dev/",
   "engines": {
     "node": ">=8"
   }

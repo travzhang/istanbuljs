@@ -1,4 +1,4 @@
-# IstanbulJS
+# `@vitest/istanbuljs`
 
 [![Build Status](https://travis-ci.org/istanbuljs/istanbuljs.svg?branch=main)](https://travis-ci.org/istanbuljs/istanbuljs)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
@@ -34,3 +34,32 @@ Contributing to the packages contained in this repo is easy:
 2. to run all tests, simply run `npm test` in the root directory.
 3. to run tests for a single package `cd package/:name` and run
    `npm test` within the package's folder.
+
+### Credits
+
+This package is originally a fork of [`istanbuljs/istanbuljs`](https://github.com/istanbuljs/istanbuljs) and was created based on https://github.com/vitest-dev/vitest/issues/9433.
+We want to thank [`istanbuljs` organization](https://github.com/orgs/istanbuljs) and their contributors for all the past work.
+
+This fork is building on top of `istanbuljs`'s ISC+BSD-3-Clause lisenced codebase. From `28ffdbc314596bdcb3007e85d30a62372602b262` forward all contributions are MIT lisenced. See each published NPM package for their specific lisencing and copyrights.
+
+<!--
+@vitest/coverage-istanbul
+- istanbul-lib-coverage
+- istanbul-lib-report
+- istanbul-reports
+- istanbul-lib-instrument
+- istanbul-lib-source-maps
+
+@vitest/coverage-v8
+- istanbul-lib-coverage
+- istanbul-lib-report
+- istanbul-reports
+
+Needed:
+- istanbul-lib-coverage
+- istanbul-lib-instrument
+- istanbul-lib-report
+- istanbul-lib-source-maps
+- istanbul-reports
+
+--!>
