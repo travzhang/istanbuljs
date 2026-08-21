@@ -8,16 +8,16 @@ tests:
   - name: function called
     args: [1, 2, 3, 4]
     out: [1, 4, 9, 16]
-    lines: {'1': 1, '2': 4}
-    statements: {'0': 1, '1': 1, '2': 4}
-    functions: {'0': 4}
+    lines: { "1": 1, "2": 4 }
+    statements: { "0": 1, "1": 1, "2": 4 }
+    functions: { "0": 4 }
 
   - name: function not called
     args: []
     out: []
-    lines: {'1': 1, '2': 1}
-    statements: {'0': 1, '1': 1, '2': 0}
-    functions: {'0': 0}
+    lines: { "1": 1, "2": 1 }
+    statements: { "0": 1, "1": 1, "2": 0 }
+    functions: { "0": 0 }
 
 ---
 name: es6 arrow function expression - multiple args
@@ -29,19 +29,19 @@ tests:
   - name: function called
     args: [1, 2, 3, 4]
     out: 10
-    lines: {'1': 1, '2': 4}
-    statements: {'0': 1, '1': 1, '2': 4}
-    functions: {'0': 4}
+    lines: { "1": 1, "2": 4 }
+    statements: { "0": 1, "1": 1, "2": 4 }
+    functions: { "0": 4 }
 
   - name: function not called
     args: []
     out: 0
-    lines: {'1': 1, '2': 1}
-    statements: {'0': 1, '1': 1, '2': 0}
-    functions: {'0': 0}
+    lines: { "1": 1, "2": 1 }
+    statements: { "0": 1, "1": 1, "2": 0 }
+    functions: { "0": 0 }
 
 ---
-name:  es6 arrow function block
+name: es6 arrow function block
 guard: isArrowFnAvailable
 code: |
   var input = args
@@ -50,16 +50,16 @@ tests:
   - name: function called
     args: [1, 2, 3, 4]
     out: [1, 4, 9, 16]
-    lines: {'1': 1, '2': 4}
-    statements: {'0': 1, '1': 1, '2': 4}
-    functions: {'0': 4}
+    lines: { "1": 1, "2": 4 }
+    statements: { "0": 1, "1": 1, "2": 4 }
+    functions: { "0": 4 }
 
   - name: function not called
     args: []
     out: []
-    lines: {'1': 1, '2': 1}
-    statements: {'0': 1, '1': 1, '2': 0}
-    functions: {'0': 0}
+    lines: { "1": 1, "2": 1 }
+    statements: { "0": 1, "1": 1, "2": 0 }
+    functions: { "0": 0 }
 
 ---
 name: es6 arrow function block - multiple args
@@ -71,16 +71,16 @@ tests:
   - name: function called
     args: [1, 2, 3, 4]
     out: 10
-    lines: {'1': 1, '2': 4}
-    statements: {'0': 1, '1': 1, '2': 4}
-    functions: {'0': 4}
+    lines: { "1": 1, "2": 4 }
+    statements: { "0": 1, "1": 1, "2": 4 }
+    functions: { "0": 4 }
 
   - name: function not called
     args: []
     out: 0
-    lines: {'1': 1, '2': 1}
-    statements: {'0': 1, '1': 1, '2': 0}
-    functions: {'0': 0}
+    lines: { "1": 1, "2": 1 }
+    statements: { "0": 1, "1": 1, "2": 0 }
+    functions: { "0": 0 }
 
 ---
 name: complex arrow fn
@@ -98,9 +98,9 @@ tests:
   - name: call nested arrow fn
     args: [1, 2, 3, 4]
     out: 10
-    lines: { '1': 1, '2': 1, '3': 1, '4': 1, '8': 1}
-    functions: { '0': 1, '1': 1, '2': 1, '3': 1 }
-    statements: { '0': 1, '1': 1, '2': 1, '3': 1, '4': 1, '5':1 }
+    lines: { "1": 1, "2": 1, "3": 1, "4": 1, "8": 1 }
+    functions: { "0": 1, "1": 1, "2": 1, "3": 1 }
+    statements: { "0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1 }
 
 ---
 name: arrow function name assignment
@@ -110,7 +110,7 @@ code: |
   output = foo.name;
 tests:
   - name: properly sets function name
-    out: 'foo'
-    lines: {'1': 1, '2': 1}
-    functions: {'0': 0}
-    statements: {'0': 1, '1': 1}
+    out: "foo"
+    lines: { "1": 1, "2": 1 }
+    functions: { "0": 0 }
+    statements: { "0": 1, "1": 1 }

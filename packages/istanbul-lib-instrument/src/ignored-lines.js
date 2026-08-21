@@ -14,48 +14,48 @@ const EOL_PATTERN = /\r?\n/g;
  * ```
  */
 function getIgnoredLines(text) {
-    if (!text) {
-        return new Set();
-    }
+  if (!text) {
+    return new Set();
+  }
 
-    const ranges = [];
-    let lineNumber = 0;
+  const ranges = [];
+  let lineNumber = 0;
 
-    for (const line of text.split(EOL_PATTERN)) {
-        lineNumber++;
+  for (const line of text.split(EOL_PATTERN)) {
+    lineNumber++;
 
-        const match = line.match(IGNORE_LINES_PATTERN);
-        if (match) {
-            const type = match[1];
+    const match = line.match(IGNORE_LINES_PATTERN);
+    if (match) {
+      const type = match[1];
 
-            if (type === 'stop') {
-                const previous = ranges[ranges.length - 1];
+      if (type === "stop") {
+        const previous = ranges[ranges.length - 1];
 
-                // Ignore whole "ignore stop" if no previous start was found
-                if (previous && previous.stop === Infinity) {
-                    previous.stop = lineNumber;
-                }
-
-                continue;
-            }
-
-            ranges.push({ start: lineNumber, stop: Infinity });
+        // Ignore whole "ignore stop" if no previous start was found
+        if (previous && previous.stop === Infinity) {
+          previous.stop = lineNumber;
         }
+
+        continue;
+      }
+
+      ranges.push({ start: lineNumber, stop: Infinity });
     }
+  }
 
-    const ignoredLines = new Set();
+  const ignoredLines = new Set();
 
-    for (const range of ranges) {
-        for (let line = range.start; line <= range.stop; line++) {
-            ignoredLines.add(line);
+  for (const range of ranges) {
+    for (let line = range.start; line <= range.stop; line++) {
+      ignoredLines.add(line);
 
-            if (line >= lineNumber) {
-                break;
-            }
-        }
+      if (line >= lineNumber) {
+        break;
+      }
     }
+  }
 
-    return ignoredLines;
+  return ignoredLines;
 }
 
 module.exports = { getIgnoredLines };

@@ -7,9 +7,9 @@ tests:
   - name: ignores variable decl
     args: []
     out: 10
-    lines: {'2': 1}
+    lines: { "2": 1 }
     branches: {}
-    statements: {'0': 1}
+    statements: { "0": 1 }
 ---
 name: simple statement
 code: |
@@ -19,16 +19,16 @@ tests:
   - name: covers line and one branch
     args: [10]
     out: 10
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [1, 0]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 0] }
+    statements: { "0": 1, "1": 1 }
 
   - name: covers line and other branch
     args: [1]
     out: undef
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [0, 1]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [0, 1] }
+    statements: { "0": 1, "1": 1 }
 ---
 name: shebang code
 code: |
@@ -48,5 +48,5 @@ tests:
   - name: coverage for mainline return
     args: []
     out: 10
-    lines: {'1': 1 }
-    statements: { '0': 1 }
+    lines: { "1": 1 }
+    statements: { "0": 1 }

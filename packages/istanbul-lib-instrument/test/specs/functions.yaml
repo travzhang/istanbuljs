@@ -10,18 +10,18 @@ tests:
   - name: covers line and function
     args: [2]
     out: 42
-    lines: {'1': 1, '3': 1, '5': 1}
-    branches: {'0': [1, 0]}
-    functions: {'0': 1}
-    statements: {'0': 1, '1': 1, '2': 1 }
+    lines: { "1": 1, "3": 1, "5": 1 }
+    branches: { "0": [1, 0] }
+    functions: { "0": 1 }
+    statements: { "0": 1, "1": 1, "2": 1 }
 
   - name: does not cover function
     args: [10]
     out: 15
-    lines: {'1': 1, '3': 0, '5': 1}
-    branches: {'0': [0, 1]}
-    functions: {'0': 0}
-    statements: {'0': 1, '1': 0, '2': 1 }
+    lines: { "1": 1, "3": 0, "5": 1 }
+    branches: { "0": [0, 1] }
+    functions: { "0": 0 }
+    statements: { "0": 1, "1": 0, "2": 1 }
 
 ---
 name: anonymous function
@@ -32,18 +32,18 @@ tests:
   - name: covers line and function
     args: [2]
     out: 42
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [1, 0]}
-    functions: {'0': 1}
-    statements: {'0': 1, '1': 1, '2': 1 }
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 0] }
+    functions: { "0": 1 }
+    statements: { "0": 1, "1": 1, "2": 1 }
 
   - name: does not cover function
     args: [10]
     out: 15
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [0, 1]}
-    functions: {'0': 0}
-    statements: {'0': 1, '1': 1, '2': 0}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [0, 1] }
+    functions: { "0": 0 }
+    statements: { "0": 1, "1": 1, "2": 0 }
 
 ---
 name: anonymous function newline
@@ -58,18 +58,18 @@ tests:
   - name: covers line and function
     args: [2]
     out: 42
-    lines: {'1': 1, '2': 1, '4': 1}
-    branches: {'0': [1, 0]}
-    functions: {'0': 1}
-    statements: {'0': 1, '1': 1, '2': 1}
+    lines: { "1": 1, "2": 1, "4": 1 }
+    branches: { "0": [1, 0] }
+    functions: { "0": 1 }
+    statements: { "0": 1, "1": 1, "2": 1 }
 
   - name: does not cover function
     args: [10]
     out: 15
-    lines: {'1': 1, '2': 1, '4': 0}
-    branches: {'0': [0, 1]}
-    functions: {'0': 0}
-    statements: {'0': 1, '1': 1, '2': 0}
+    lines: { "1": 1, "2": 1, "4": 0 }
+    branches: { "0": [0, 1] }
+    functions: { "0": 0 }
+    statements: { "0": 1, "1": 1, "2": 0 }
 
 ---
 name: function decl in unreachable place
@@ -83,18 +83,18 @@ tests:
   - name: covers declaration but not function
     args: [1]
     out: 2
-    lines: { '2': 0, '3': 0, '5': 1}
-    branches: {'0': [1, 0]}
-    functions: {'0': 0, '1': 0}
-    statements: {'0': 0, '1': 0, '2': 1}
+    lines: { "2": 0, "3": 0, "5": 1 }
+    branches: { "0": [1, 0] }
+    functions: { "0": 0, "1": 0 }
+    statements: { "0": 0, "1": 0, "2": 1 }
 
   - name: covers declaration and function
     args: [10]
     out: 20
-    lines: { '2': 1, '3': 1, '5': 1}
-    branches: {'0': [0, 1]}
-    functions: {'0': 1, '1': 1}
-    statements: {'0': 1, '1': 1, '2': 1 }
+    lines: { "2": 1, "3": 1, "5": 1 }
+    branches: { "0": [0, 1] }
+    functions: { "0": 1, "1": 1 }
+    statements: { "0": 1, "1": 1, "2": 1 }
 
 ---
 name: function declaration assignment name (top-level)
@@ -105,10 +105,10 @@ code: |
   output = foo.name + ' ' + bar.name;
 tests:
   - name: properly sets function name
-    out: 'foo bar'
-    lines: {'1': 1, '2': 1, '3': 1}
-    functions: {'0': 0, '1': 0}
-    statements: {'0': 1, '1': 1, '2': 1}
+    out: "foo bar"
+    lines: { "1": 1, "2": 1, "3": 1 }
+    functions: { "0": 0, "1": 0 }
+    statements: { "0": 1, "1": 1, "2": 1 }
     guard: isInferredFunctionNameAvailable
 
 ---
@@ -125,10 +125,10 @@ code: |
   output = b()
 tests:
   - name: properly sets function name
-    out: 'bar'
-    lines: {'2': 0, '5': 1, '6': 1, '8': 1}
-    functions: {'0': 0, '1': 0, '2': 1, '3': 0}
-    statements: {'0': 0, '1': 1, '2': 1, '3': 1}
+    out: "bar"
+    lines: { "2": 0, "5": 1, "6": 1, "8": 1 }
+    functions: { "0": 0, "1": 0, "2": 1, "3": 0 }
+    statements: { "0": 0, "1": 1, "2": 1, "3": 1 }
     guard: isInferredFunctionNameAvailable
 
 ---
@@ -141,6 +141,6 @@ code: |
 tests:
   - name: does not fail if a function is called Function
     out: 42
-    lines: {'2': 1, '4': 1}
-    functions: {'0': 1}
-    statements: {'0': 1, '1': 1}
+    lines: { "2": 1, "4": 1 }
+    functions: { "0": 1 }
+    statements: { "0": 1, "1": 1 }

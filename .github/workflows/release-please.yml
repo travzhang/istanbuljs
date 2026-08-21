@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-          registry-url: 'https://external-dot-oss-automation.appspot.com/'
+          registry-url: "https://external-dot-oss-automation.appspot.com/"
       - name: publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_MONOREPO_TOKEN}}

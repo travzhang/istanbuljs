@@ -7,23 +7,23 @@ tests:
   - name: covers line and one branch
     args: [-1]
     out: false
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [1, 0]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 0] }
+    statements: { "0": 1, "1": 1 }
 
   - name: covers line, both branches, returns false
     args: [10]
     out: false
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [1, 1]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 1] }
+    statements: { "0": 1, "1": 1 }
 
   - name: covers line, both branches, returns true
     args: [3]
     out: true
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [1, 1]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 1] }
+    statements: { "0": 1, "1": 1 }
 
 ---
 name: complex expression
@@ -34,23 +34,23 @@ tests:
   - name: covers line and one branch
     args: [-1]
     out: false
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [1, 0, 0]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 0, 0] }
+    statements: { "0": 1, "1": 1 }
 
   - name: covers line, both branches, returns false
     args: [9]
     out: false
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [1, 1, 1]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 1, 1] }
+    statements: { "0": 1, "1": 1 }
 
   - name: covers line, both branches, returns true
     args: [3]
     out: true
-    lines: {'1': 1, '2': 1}
-    branches: {'0': [1, 1, 0]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 1, 0] }
+    statements: { "0": 1, "1": 1 }
 
 ---
 name: array expression with empty positions
@@ -59,11 +59,11 @@ code: |
   output = x.indexOf(args[1]) === x.length - 1 && x[0] !== x[1];
 tests:
   - name: covers correctly without error
-    args: [1,5]
+    args: [1, 5]
     out: true
-    lines: {'1': 1, '2': 1}
-    branches: { '0': [1, 1] }
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 1] }
+    statements: { "0": 1, "1": 1 }
 
 ---
 name: or with object expression (bug track)
@@ -72,11 +72,11 @@ code: |
   output = x.foo;
 tests:
   - name: covers all branches correctly
-    args: [ false ]
+    args: [false]
     out: 2
-    lines: {'1': 1, '2': 1}
-    branches: { '0': [0, 1] }
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [0, 1] }
+    statements: { "0": 1, "1": 1 }
 
 ---
 name: or with object expression (part 2)
@@ -85,8 +85,8 @@ code: |
   output = x.foo;
 tests:
   - name: covers all branches correctly
-    args: [ false ]
+    args: [false]
     out: 2
-    lines: {'1': 1, '2': 1}
-    branches: { '0': [1, 1] }
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "2": 1 }
+    branches: { "0": [1, 1] }
+    statements: { "0": 1, "1": 1 }

@@ -91,7 +91,8 @@
         }
       },
       "type": "if",
-      "locations": [{
+      "locations": [
+        {
           "start": {
             "line": 4,
             "column": 4

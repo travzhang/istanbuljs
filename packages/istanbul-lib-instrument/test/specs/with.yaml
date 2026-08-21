@@ -5,8 +5,8 @@ code: |
 tests:
   - args: [-1]
     out: 1
-    lines: {'1': 1}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1 }
+    statements: { "0": 1, "1": 1 }
 instrumentOpts:
   esModules: false
 
@@ -17,7 +17,7 @@ code: |
 tests:
   - args: [-1]
     out: 1
-    lines: {'1': 1}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1 }
+    statements: { "0": 1, "1": 1 }
 instrumentOpts:
   esModules: false

@@ -1,6 +1,5 @@
 {
-  "statementMap": {
-  },
+  "statementMap": {},
   "fnMap": {
     "0": {
       "name": "test",
@@ -26,13 +25,10 @@
       }
     }
   },
-  "branchMap": {
-  },
-  "s": {
-  },
+  "branchMap": {},
+  "s": {},
   "f": {
     "0": 0
   },
-  "b": {
-  }
+  "b": {}
 }

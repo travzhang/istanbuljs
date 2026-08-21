@@ -6,8 +6,8 @@
   "packageManager": "pnpm@11.22.0",
   "scripts": {
     "test": "cross-env NODE_ENV=test nyc mocha --timeout 30000 packages/*/test{,/*}.js",
-    "posttest": "eslint .",
-    "fix": "eslint . --fix"
+    "fmt": "oxfmt",
+    "lint": "oxlint"
   },
   "repository": {
     "type": "git",
@@ -25,18 +25,13 @@
   },
   "homepage": "https://vitest.dev/",
   "devDependencies": {
-    "babel-eslint": "catalog:",
     "coveralls": "catalog:",
     "cross-env": "catalog:",
-    "eslint": "catalog:",
-    "eslint-config-prettier": "catalog:",
-    "eslint-plugin-import": "catalog:",
-    "eslint-plugin-prettier": "catalog:",
-    "eslint-plugin-react": "catalog:",
     "glob": "catalog:",
     "mocha": "catalog:",
     "nyc": "catalog:",
-    "prettier": "catalog:"
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:"
   },
   "nyc": {
     "reporter": [
@@ -46,9 +41,5 @@
   },
   "engines": {
     "node": ">=8"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "tabWidth": 4
   }
 }

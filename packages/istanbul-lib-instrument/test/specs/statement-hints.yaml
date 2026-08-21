@@ -8,9 +8,9 @@ tests:
   - name: coverage correct with skip meta
     args: [10]
     out: 10
-    lines: {'3': 1}
+    lines: { "3": 1 }
     branches: {}
-    statements: {'0': 1}
+    statements: { "0": 1 }
 
 ---
 name: ignore before function declaration
@@ -21,9 +21,9 @@ code: |
 tests:
   - args: [10]
     out: 10
-    lines: { '3': 1 }
+    lines: { "3": 1 }
     functions: {}
-    statements: { '0': 1 }
+    statements: { "0": 1 }
 
 ---
 name: ignore before func expressions
@@ -46,7 +46,7 @@ code: |
   default: output = 1;
   }
 tests:
-  - args: ['1']
+  - args: ["1"]
     out: 2
     lines: {}
     branches: {}
@@ -61,11 +61,11 @@ code: |
   default: output = 1;
   }
 tests:
-  - args: ['2']
+  - args: ["2"]
     out: 1
-    lines: {'1': 1, '4': 1}
-    branches: {'0': [1]}
-    statements: {'0': 1, '1': 1}
+    lines: { "1": 1, "4": 1 }
+    branches: { "0": [1] }
+    statements: { "0": 1, "1": 1 }
 
 ---
 name: ignore before ternary statement
@@ -86,9 +86,9 @@ code: |
 tests:
   - args: [2]
     out: 0
-    lines: {'1': 1}
-    branches: {'0': [1]}
-    statements: {'0': 1}
+    lines: { "1": 1 }
+    branches: { "0": [1] }
+    statements: { "0": 1 }
 
 ---
 name: ignore in logical expression
@@ -101,9 +101,9 @@ code: |
 tests:
   - args: [1]
     out: 11
-    lines: {'1': 1, '2': 1, '4': 0}
-    branches: {'0': [1, 0], '1': [1]}
-    statements: {'0': 1, '1': 1, '2': 0}
+    lines: { "1": 1, "2": 1, "4": 0 }
+    branches: { "0": [1, 0], "1": [1] }
+    statements: { "0": 1, "1": 1, "2": 0 }
 
 ---
 name: ignore in complex logical expression
@@ -116,9 +116,9 @@ code: >
 tests:
   - args: [1]
     out: 11
-    lines: {'1': 1, '2': 1, '4': 0}
-    branches: {'0': [1, 0], '1': [1]}
-    statements: {'0': 1, '1': 1, '2': 0}
+    lines: { "1": 1, "2": 1, "4": 0 }
+    branches: { "0": [1, 0], "1": [1] }
+    statements: { "0": 1, "1": 1, "2": 0 }
 
 ---
 name: ignore in logical expression with implied operator precedence
@@ -131,9 +131,9 @@ code: >
 tests:
   - args: [1, 1]
     out: 11
-    lines: {'1': 1, '2': 1, '4': 0}
-    branches: {'0': [1, 0], '1': [1]}
-    statements: {'0': 1, '1': 1, '2': 0}
+    lines: { "1": 1, "2": 1, "4": 0 }
+    branches: { "0": [1, 0], "1": [1] }
+    statements: { "0": 1, "1": 1, "2": 0 }
 
 ---
 name: ignore before logical expression
@@ -146,49 +146,48 @@ code: >
 tests:
   - args: [1, 1]
     out: 11
-    lines: {'1': 1, '2': 1, '4': 0}
-    branches: {'0': [1, 0] }
-    statements: {'0': 1, '1': 1, '2': 0}
+    lines: { "1": 1, "2": 1, "4": 0 }
+    branches: { "0": [1, 0] }
+    statements: { "0": 1, "1": 1, "2": 0 }
 ---
 name: ignore class methods
 guard: isClassAvailable
 code: |
-    class TestClass {
-        dummy(i) {return i;}
-        nonIgnored(i) {return i;}
-    }
-    var testClass = new TestClass();
-    testClass.nonIgnored();
-    output = testClass.dummy(args[0]);
+  class TestClass {
+      dummy(i) {return i;}
+      nonIgnored(i) {return i;}
+  }
+  var testClass = new TestClass();
+  testClass.nonIgnored();
+  output = testClass.dummy(args[0]);
 instrumentOpts:
-  ignoreClassMethods: ['dummy']
+  ignoreClassMethods: ["dummy"]
 tests:
-  - name: ignores only specified es6 methods 
+  - name: ignores only specified es6 methods
     args: [10]
     out: 10
-    lines: {'3': 1, '5': 1, '6': 1, '7': 1}
-    functions: {'0': 1}
+    lines: { "3": 1, "5": 1, "6": 1, "7": 1 }
+    functions: { "0": 1 }
     branches: {}
-    statements: {'0': 1, '1': 1, '2': 1, '3': 1}
+    statements: { "0": 1, "1": 1, "2": 1, "3": 1 }
 ---
 name: ignore class methods
 code: |
-    function TestClass() {}
-    TestClass.prototype.testMethod = function testMethod(i) {
-        return i;
-    };
-    TestClass.prototype.goodMethod = function goodMethod(i) {return i;};
-    var testClass = new TestClass();
-    testClass.goodMethod();
-    output = testClass.testMethod(args[0]);
+  function TestClass() {}
+  TestClass.prototype.testMethod = function testMethod(i) {
+      return i;
+  };
+  TestClass.prototype.goodMethod = function goodMethod(i) {return i;};
+  var testClass = new TestClass();
+  testClass.goodMethod();
+  output = testClass.testMethod(args[0]);
 instrumentOpts:
-  ignoreClassMethods: ['testMethod']
+  ignoreClassMethods: ["testMethod"]
 tests:
   - name: ignores only specified es5 methods
     args: [10]
     out: 10
-    lines: {'2': 1, '5': 1, '6': 1, '7': 1, '8': 1}
-    functions: {'0': 1, '1': 1}
+    lines: { "2": 1, "5": 1, "6": 1, "7": 1, "8": 1 }
+    functions: { "0": 1, "1": 1 }
     branches: {}
-    statements: {'0': 1, '1': 1, '2': 1, '3': 1, '4': 1, '5': 1}
-
+    statements: { "0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1 }
