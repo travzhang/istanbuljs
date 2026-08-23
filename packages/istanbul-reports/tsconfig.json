@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "paths": {}
-  },
-  "include": ["src", "test"],
-  "exclude": ["src/html-spa/src", "src/html-spa/assets", "src/html/assets"]
-}

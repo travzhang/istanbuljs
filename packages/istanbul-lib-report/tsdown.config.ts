@@ -7,6 +7,7 @@ export default defineConfig({
   tsconfig: "./tsconfig.json",
   target: "esnext",
   clean: true,
+  unbundle: true,
 
   minify: {
     codegen: { removeWhitespace: false },
@@ -16,4 +17,9 @@ export default defineConfig({
   outputOptions: { comments: false },
 
   dts: true,
+
+  copy: [
+    { from: "src/reports/html/assets", to: "dist/reports/html" },
+    { from: "src/reports/html-spa/assets", to: "dist/reports/html-spa" },
+  ],
 });

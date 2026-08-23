@@ -1,16 +1,15 @@
-# istanbul-lib-report
+# @vitest/istanbul-lib-report
 
-[![Build Status](https://travis-ci.org/istanbuljs/istanbul-lib-report.svg?branch=main)](https://travis-ci.org/istanbuljs/istanbul-lib-report)
-
-Core reporting utilities for istanbul.
+Core reporting utilities and report generators for istanbul. This package contains both the
+reporting context (formerly `istanbul-lib-report`) and the built-in reports
+(formerly `istanbul-reports`).
 
 ## Example usage
 
 ```js
-const libReport = require("istanbul-lib-report");
-const reports = require("istanbul-reports");
+import * as libReport from "@vitest/istanbul-lib-report";
 
-// coverageMap, for instance, obtained from istanbul-lib-coverage
+// coverageMap, for instance, obtained from @vitest/istanbul-lib-coverage
 const coverageMap;
 
 const configWatermarks = {
@@ -32,7 +31,7 @@ const context = libReport.createContext({
 
 // create an instance of the relevant report class, passing the
 // report name e.g. json/html/html-spa/text
-const report = reports.create("json", {
+const report = libReport.create("json", {
   skipEmpty: configSkipEmpty,
   skipFull: configSkipFull,
 });

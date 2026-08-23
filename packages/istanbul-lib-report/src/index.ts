@@ -7,10 +7,37 @@
  * @module Exports
  */
 
+import { createRequire } from "node:module";
+
 import Context from "./context";
 import type { ContextOptions } from "./context";
 import FileWriter from "./file-writer";
 import ReportBase from "./report-base";
+import CloverReport from "./reports/clover/index";
+import type { CloverOptions } from "./reports/clover/index";
+import CoberturaReport from "./reports/cobertura/index";
+import type { CoberturaOptions } from "./reports/cobertura/index";
+import HtmlSpaReport from "./reports/html-spa/index";
+import type { HtmlSpaOptions } from "./reports/html-spa/index";
+import HtmlReport from "./reports/html/index";
+import type { HtmlOptions } from "./reports/html/index";
+import JsonSummaryReport from "./reports/json-summary/index";
+import type { JsonSummaryOptions } from "./reports/json-summary/index";
+import JsonReport from "./reports/json/index";
+import type { JsonOptions } from "./reports/json/index";
+import LcovReport from "./reports/lcov/index";
+import type { LcovOptions } from "./reports/lcov/index";
+import LcovOnlyReport from "./reports/lcovonly/index";
+import type { LcovOnlyOptions } from "./reports/lcovonly/index";
+import NoneReport from "./reports/none/index";
+import TeamcityReport from "./reports/teamcity/index";
+import type { TeamcityOptions } from "./reports/teamcity/index";
+import TextLcovReport from "./reports/text-lcov/index";
+import type { TextLcovOptions } from "./reports/text-lcov/index";
+import TextSummaryReport from "./reports/text-summary/index";
+import type { TextSummaryOptions } from "./reports/text-summary/index";
+import TextReport from "./reports/text/index";
+import type { TextOptions } from "./reports/text/index";
 import * as watermarks from "./watermarks";
 import type { Watermarks } from "./watermarks";
 
@@ -18,6 +45,18 @@ export type { ContextOptions, SourceFinder } from "./context";
 export type { Context };
 export type { ContentWriter, ConsoleWriter, FileContentWriter } from "./file-writer";
 export type { ReportBaseOptions } from "./report-base";
+export type { CloverOptions } from "./reports/clover/index";
+export type { CoberturaOptions } from "./reports/cobertura/index";
+export type { HtmlSpaOptions } from "./reports/html-spa/index";
+export type { HtmlOptions, LinkMapper } from "./reports/html/index";
+export type { JsonSummaryOptions } from "./reports/json-summary/index";
+export type { JsonOptions } from "./reports/json/index";
+export type { LcovOptions } from "./reports/lcov/index";
+export type { LcovOnlyOptions } from "./reports/lcovonly/index";
+export type { TeamcityOptions } from "./reports/teamcity/index";
+export type { TextLcovOptions } from "./reports/text-lcov/index";
+export type { TextSummaryOptions } from "./reports/text-summary/index";
+export type { TextOptions } from "./reports/text/index";
 export type { ReportNode, ReportTree, Summarizers } from "./summarizer-factory";
 export type { BaseNode, BaseTree, CompositeVisitor, PartialVisitor, Visitor } from "./tree";
 export type { Watermark, Watermarks } from "./watermarks";
@@ -52,3 +91,56 @@ export { ReportBase };
  * Utility for writing files under a specific directory
  */
 export { FileWriter };
+
+const reports = {
+  clover: CloverReport,
+  cobertura: CoberturaReport,
+  html: HtmlReport,
+  "html-spa": HtmlSpaReport,
+  json: JsonReport,
+  "json-summary": JsonSummaryReport,
+  lcov: LcovReport,
+  lcovonly: LcovOnlyReport,
+  none: NoneReport,
+  teamcity: TeamcityReport,
+  text: TextReport,
+  "text-lcov": TextLcovReport,
+  "text-summary": TextSummaryReport,
+};
+
+/** options accepted by each built-in report, keyed by report name */
+export interface ReportOptions {
+  clover: CloverOptions;
+  cobertura: CoberturaOptions;
+  html: HtmlOptions;
+  "html-spa": HtmlSpaOptions;
+  json: JsonOptions;
+  "json-summary": JsonSummaryOptions;
+  lcov: LcovOptions;
+  lcovonly: LcovOnlyOptions;
+  none: never;
+  teamcity: TeamcityOptions;
+  text: TextOptions;
+  "text-lcov": TextLcovOptions;
+  "text-summary": TextSummaryOptions;
+}
+
+/** names of the built-in reports */
+export type ReportType = keyof ReportOptions;
+
+export function create<T extends ReportType>(
+  name: T,
+  cfg?: Partial<ReportOptions[T]>,
+): InstanceType<(typeof reports)[T]>;
+export function create(name: string, cfg?: object): ReportBase;
+export function create(name: string, cfg?: object): ReportBase {
+  cfg = cfg || {};
+  let Cons = (reports as Record<string, unknown>)[name] as new (cfg: object) => ReportBase;
+
+  if (!Cons) {
+    // TODO Verify custom reporters load here fine
+    Cons = createRequire(import.meta.url)(name);
+  }
+
+  return new Cons(cfg);
+}

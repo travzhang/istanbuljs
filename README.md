@@ -45,21 +45,34 @@ This fork is building on top of `istanbuljs`'s ISC+BSD-3-Clause lisenced codebas
 <!--
 @vitest/coverage-istanbul
 - istanbul-lib-coverage
-- istanbul-lib-report
-- istanbul-reports
+- istanbul-lib-report (includes former istanbul-reports)
 - istanbul-lib-instrument
 - istanbul-lib-source-maps
 
 @vitest/coverage-v8
 - istanbul-lib-coverage
-- istanbul-lib-report
-- istanbul-reports
+- istanbul-lib-report (includes former istanbul-reports)
 
 Needed:
 - istanbul-lib-coverage
 - istanbul-lib-instrument
-- istanbul-lib-report
+- istanbul-lib-report (includes former istanbul-reports)
 - istanbul-lib-source-maps
-- istanbul-reports
+
+```ts
+import type { CoverageMap, CoverageMapData, CoverageSummary } from 'istanbul-lib-coverage'
+import type { Instrumenter } from 'istanbul-lib-instrument'
+
+import { createInstrumenter } from 'istanbul-lib-instrument'
+import libCoverage from 'istanbul-lib-coverage'
+import libSourceMaps from 'istanbul-lib-source-maps'
+import libReport from 'istanbul-lib-report'
+
+libReport.createContext
+libReport.create
+libCoverage.createCoverageMap
+createInstrumenter
+libSourceMaps.createSourceMapStore
+```
 
 --!>

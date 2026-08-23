@@ -222,47 +222,15 @@ importers:
       '@vitest/istanbul-lib-coverage':
         specifier: workspace:*
         version: link:../istanbul-lib-coverage
+      html-escaper:
+        specifier: 'catalog:'
+        version: 2.0.2
       make-dir:
         specifier: 'catalog:'
         version: 4.0.0
       supports-color:
         specifier: 'catalog:'
         version: 7.2.0
-    devDependencies:
-      rimraf:
-        specifier: 'catalog:'
-        version: 3.0.2
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.14(typescript@7.0.2)
-
-  packages/istanbul-lib-source-maps:
-    dependencies:
-      '@jridgewell/trace-mapping':
-        specifier: 'catalog:'
-        version: 0.3.31
-      '@vitest/istanbul-lib-coverage':
-        specifier: workspace:*
-        version: link:../istanbul-lib-coverage
-      debug:
-        specifier: 'catalog:'
-        version: 4.4.3(supports-color@7.2.0)
-    devDependencies:
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.14(typescript@7.0.2)
-
-  packages/istanbul-reports:
-    dependencies:
-      '@vitest/istanbul-lib-coverage':
-        specifier: workspace:*
-        version: link:../istanbul-lib-coverage
-      '@vitest/istanbul-lib-report':
-        specifier: workspace:*
-        version: link:../istanbul-lib-report
-      html-escaper:
-        specifier: 'catalog:'
-        version: 2.0.2
     devDependencies:
       '@babel/core':
         specifier: 'catalog:'
@@ -285,6 +253,9 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 16.14.0(react@16.14.0)
+      rimraf:
+        specifier: 'catalog:'
+        version: 3.0.2
       tsdown:
         specifier: 'catalog:'
         version: 0.22.14(typescript@7.0.2)
@@ -294,6 +265,22 @@ importers:
       webpack-cli:
         specifier: 'catalog:'
         version: 3.3.12(webpack@4.47.0)
+
+  packages/istanbul-lib-source-maps:
+    dependencies:
+      '@jridgewell/trace-mapping':
+        specifier: 'catalog:'
+        version: 0.3.31
+      '@vitest/istanbul-lib-coverage':
+        specifier: workspace:*
+        version: link:../istanbul-lib-coverage
+      debug:
+        specifier: 'catalog:'
+        version: 4.4.3(supports-color@7.2.0)
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.22.14(typescript@7.0.2)
 
 packages:
 
@@ -7685,7 +7672,7 @@ snapshots:
 
   md5.js@1.3.5:
     dependencies:
-      hash-base: 3.0.5
+      hash-base: 3.1.2
       inherits: 2.0.4
       safe-buffer: 5.2.1
 

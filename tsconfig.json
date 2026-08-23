@@ -12,8 +12,7 @@
       "@vitest/istanbul-lib-coverage": ["./packages/istanbul-lib-coverage/src/index.ts"],
       "@vitest/istanbul-lib-instrument": ["./packages/istanbul-lib-instrument/src/index.ts"],
       "@vitest/istanbul-lib-report": ["./packages/istanbul-lib-report/src/index.ts"],
-      "@vitest/istanbul-lib-source-maps": ["./packages/istanbul-lib-source-maps/src/index.ts"],
-      "@vitest/istanbul-reports": ["./packages/istanbul-reports/src/index.ts"]
+      "@vitest/istanbul-lib-source-maps": ["./packages/istanbul-lib-source-maps/src/index.ts"]
     }
   },
   "include": ["packages/*/src", "packages/*/test"]
