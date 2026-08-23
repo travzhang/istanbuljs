@@ -7,7 +7,7 @@ import type { CoverageSummaryData } from "./coverage-summary";
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 /**
- * istanbul-lib-coverage exports an API that allows you to create and manipulate
+ * @vitest/istanbul-lib-coverage exports an API that allows you to create and manipulate
  * file coverage, coverage maps (a set of file coverage objects) and summary
  * coverage objects. File coverage for the same file can be merged as can
  * entire coverage maps.

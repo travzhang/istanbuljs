@@ -750,7 +750,7 @@ const coverageTemplate = template(
 // may cause files to be instrumented twice, see:
 // https://github.com/istanbuljs/babel-plugin-istanbul/issues/94
 // we should only instrument code for coverage the first time
-// it's run through istanbul-lib-instrument.
+// it's run through @vitest/istanbul-lib-instrument.
 function alreadyInstrumented(path: NodePath, visitState: VisitState): boolean {
   return path.scope.hasBinding(visitState.varName);
 }
