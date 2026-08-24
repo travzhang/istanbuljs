@@ -17,7 +17,7 @@
   "author": "Vitest Team",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/vitest-dev/istanbuljs.git",
+    "url": "git+https://github.com/vitest-dev/istanbuljs.git",
     "directory": "packages/istanbul-lib-instrument"
   },
   "files": [
