@@ -14,7 +14,7 @@
 This package is originally a fork of [`istanbuljs/istanbuljs`](https://github.com/istanbuljs/istanbuljs) and was created based on https://github.com/vitest-dev/vitest/issues/9433.
 We want to thank [`istanbuljs` organization](https://github.com/orgs/istanbuljs) and their contributors for all the past work.
 
-This fork is building on top of `istanbuljs`'s ISC+BSD-3-Clause lisenced codebase. From `28ffdbc314596bdcb3007e85d30a62372602b262` forward all contributions are MIT lisenced. See each published NPM package for their specific lisencing and copyrights.
+This fork is building on top of `istanbuljs`'s ISC+BSD-3-Clause licensed codebase. From `28ffdbc314596bdcb3007e85d30a62372602b262` forward all contributions are MIT licensed. See each published NPM package for their specific licensing and copyrights.
 
 ## License
 
