@@ -1,9 +1,12 @@
+import type { FileCoverageData } from "@vitest/istanbul-lib-coverage";
+
 /*
  Copyright 2012-2015, Yahoo Inc.
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-import type { ReportNode } from "../../index";
+import type { Context, ReportNode } from "../../index";
 import ReportBase from "../../report-base";
+import { CoverageReport } from "./coverage-report";
 
 /** maps report nodes to output paths, see the html report's `linkMapper` option */
 export interface LinkMapper {
@@ -27,8 +30,27 @@ export interface HtmlOptions {
 }
 
 class HtmlReport extends ReportBase {
-  constructor(_opts?: HtmlOptions) {
+  private options: HtmlOptions;
+  private coverage: Record<string, FileCoverageData> = {};
+
+  constructor(opts?: HtmlOptions) {
     super();
+    this.options = opts ?? {};
+    this.coverage = {};
+  }
+
+  onDetail(node: ReportNode): void {
+    const fileCoverage = node.getFileCoverage().toJSON();
+    this.coverage[fileCoverage.path] = fileCoverage;
+  }
+
+  async onEnd(_rootNode: ReportNode, context: Context): Promise<void> {
+    const cr = new CoverageReport(this.options);
+    await cr.generate({
+      coverage: this.coverage,
+      targetDir: context.dir,
+      sourceFinder: context.sourceFinder,
+    });
   }
 }
 

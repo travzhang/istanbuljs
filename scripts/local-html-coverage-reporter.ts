@@ -1,7 +1,8 @@
+import type { Reporter } from "vitest/node";
+
 import { createCoverageMap } from "../packages/istanbul-lib-coverage/src";
 import type { CoverageMapData } from "../packages/istanbul-lib-coverage/src";
 import { create, createContext } from "../packages/istanbul-lib-report/src";
-import type { Reporter } from "vitest/node";
 
 function toCoverageMapData(coverage: unknown): CoverageMapData {
   if (
