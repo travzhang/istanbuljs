@@ -17,9 +17,4 @@ export default defineConfig({
   outputOptions: { comments: false },
 
   dts: true,
-
-  copy: [
-    { from: "src/reports/html/assets", to: "dist/reports/html" },
-    { from: "src/reports/html-spa/assets", to: "dist/reports/html-spa" },
-  ],
 });

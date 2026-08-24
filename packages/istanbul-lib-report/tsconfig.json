@@ -3,6 +3,5 @@
   "compilerOptions": {
     "paths": {}
   },
-  "include": ["src", "test"],
-  "exclude": ["src/reports/html-spa/src", "src/reports/html-spa/assets", "src/reports/html/assets"]
+  "include": ["src", "test"]
 }
