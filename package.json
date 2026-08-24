@@ -21,7 +21,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r run build",
-    "test": "vitest",
+    "test": "vitest run",
     "fmt": "oxfmt",
     "lint": "oxlint",
     "typecheck": "tsc --noEmit"
