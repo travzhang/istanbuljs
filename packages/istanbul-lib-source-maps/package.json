@@ -1,6 +1,6 @@
 {
   "name": "@vitest/istanbul-lib-source-maps",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Source maps support for istanbul",
   "keywords": [
     "istanbul",
