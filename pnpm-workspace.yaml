@@ -28,7 +28,7 @@ catalog:
   typescript: ^7.0.2
   "@e18e/eslint-plugin": ^0.8.0
   changelogithub: ^15.0.4
-  canyonjs-dev-report: ^1.0.16
+  canyonjs-dev-report: ^1.0.18
 minimumReleaseAgeExclude:
-  - canyonjs-dev-report-html@1.0.16
-  - canyonjs-dev-report@1.0.16
+  - canyonjs-dev-report-html@1.0.18
+  - canyonjs-dev-report@1.0.18
