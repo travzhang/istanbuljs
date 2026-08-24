@@ -36,7 +36,8 @@
     "test": "pnpm --filter @vitest/istanbuljs-monorepo run test --project @vitest/istanbul-lib-report"
   },
   "dependencies": {
-    "@vitest/istanbul-lib-coverage": "workspace:*"
+    "@vitest/istanbul-lib-coverage": "workspace:*",
+    "canyonjs-dev-report": "catalog:"
   },
   "devDependencies": {
     "@vitest/browser-playwright": "catalog:",

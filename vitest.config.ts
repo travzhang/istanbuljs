@@ -6,7 +6,10 @@ export default defineConfig({
       enabled: true,
       provider: "v8",
       include: ["packages/**/src/**/*.ts"],
+      exclude: ["packages/istanbul-lib-report/src/reports/**"],
+      reporter: ["json"],
     },
-    projects: ["packages/*/vitest.config.*"],
+    reporters: ["default", "./scripts/local-html-coverage-reporter.ts"],
+    projects: ["packages/*"],
   },
 });
