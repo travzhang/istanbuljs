@@ -45,3 +45,7 @@ catalog:
   vitest: ^4.1.10
   "@vitest/coverage-v8": 4.1.11
   typescript: ^7.0.2
+  canyonjs-dev-report: ^1.0.15
+minimumReleaseAgeExclude:
+  - canyonjs-dev-report@1.0.15
+  - canyonjs-dev-report-html@1.0.15

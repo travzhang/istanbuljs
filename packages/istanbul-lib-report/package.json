@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@vitest/istanbul-lib-coverage": "workspace:*",
+    "canyonjs-dev-report": "catalog:",
     "html-escaper": "catalog:",
     "make-dir": "catalog:",
     "supports-color": "catalog:"

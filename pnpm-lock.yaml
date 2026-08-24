@@ -51,6 +51,9 @@ catalogs:
     '@vitest/coverage-v8':
       specifier: 4.1.11
       version: 4.1.11
+    canyonjs-dev-report:
+      specifier: ^1.0.15
+      version: 1.0.15
     clone:
       specifier: ^2.1.2
       version: 2.1.2
@@ -201,6 +204,9 @@ importers:
       '@vitest/istanbul-lib-coverage':
         specifier: workspace:*
         version: link:../istanbul-lib-coverage
+      canyonjs-dev-report:
+        specifier: 'catalog:'
+        version: 1.0.15
       html-escaper:
         specifier: 'catalog:'
         version: 2.0.2
@@ -1879,6 +1885,12 @@ packages:
 
   caniuse-lite@1.0.30001809:
     resolution: {integrity: sha512-xxWVywk6a6Arlk+hymeycyn/VgqEfLDxupvhH/xiY5SJ/18kmi9o6MiO320DCUzypORHLtvh0I4i04tUhCNHNQ==}
+
+  canyonjs-dev-report-html@1.0.15:
+    resolution: {integrity: sha512-CU8/XqCAuZsYQW+P1X9mmw6YQ4NzzzQExFn4DC7+JiwsA04bk996fr6U/sBAvNlwrmGnHK4BYQL9IxKMo/Q8bg==}
+
+  canyonjs-dev-report@1.0.15:
+    resolution: {integrity: sha512-XioaHGHNJ6W9Nd83uR79tflhtRB2GujHhe9IXxyDj6IgTWkJxCyNlK0FP8PONFwQtGlUyIugJJMoBqkOtUliqQ==}
 
   ccount@1.1.0:
     resolution: {integrity: sha512-vlNK021QdI7PNeiUh/lKkC/mNHHfV0m/Ad5JoI0TYtlBnJAslM/JIkm/tGC88bkLIwO6OQ5uV6ztS6kVAtCDlg==}
@@ -5413,6 +5425,16 @@ snapshots:
   camelcase@5.3.1: {}
 
   caniuse-lite@1.0.30001809: {}
+
+  canyonjs-dev-report-html@1.0.15:
+    optional: true
+
+  canyonjs-dev-report@1.0.15:
+    dependencies:
+      istanbul-lib-coverage: 3.2.2
+      istanbul-lib-report: 3.0.1
+    optionalDependencies:
+      canyonjs-dev-report-html: 1.0.15
 
   ccount@1.1.0: {}
 
