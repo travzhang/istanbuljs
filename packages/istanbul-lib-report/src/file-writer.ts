@@ -6,9 +6,6 @@ Copyrights licensed under the New BSD License. See the accompanying LICENSE file
 import fs from "node:fs";
 import path from "node:path";
 
-import mkdirp from "make-dir";
-import supportsColor from "supports-color";
-
 /**
  * Base class for writing content
  * @class ContentWriter
@@ -98,7 +95,7 @@ class ConsoleWriter extends ContentWriter {
     };
 
     /* istanbul ignore next: different modes for CI and local */
-    if (supportsColor.stdout && colors[clazz as string]) {
+    if (process.stdout.isTTY && process.stdout.hasColors() && colors[clazz as string]) {
       return `\u001b[${colors[clazz as string]}m${str}\u001b[0m`;
     }
     return str;
@@ -166,7 +163,7 @@ class FileWriter {
       throw new Error(`Cannot write to absolute path: ${dest}`);
     }
     dest = path.resolve(this.baseDir, dest);
-    mkdirp.sync(path.dirname(dest));
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
     let contents: string | Buffer;
     if (header) {
       contents = header + fs.readFileSync(source, "utf8");
@@ -190,7 +187,7 @@ class FileWriter {
       throw new Error(`Cannot write to absolute path: ${file}`);
     }
     file = path.resolve(this.baseDir, file);
-    mkdirp.sync(path.dirname(file));
+    fs.mkdirSync(path.dirname(file), { recursive: true });
     return new FileContentWriter(fs.openSync(file, "w"));
   }
 }

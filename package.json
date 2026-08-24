@@ -27,14 +27,8 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/clone": "catalog:",
-    "@types/debug": "catalog:",
-    "@types/html-escaper": "catalog:",
-    "@types/is-windows": "catalog:",
-    "@types/js-yaml": "catalog:",
+    "@e18e/eslint-plugin": "catalog:",
     "@types/node": "catalog:",
-    "@types/rimraf": "catalog:",
-    "@types/semver": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
