@@ -1,6 +1,6 @@
 {
   "name": "@vitest/istanbul-lib-report",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Base reporting library and report generators for istanbul",
   "keywords": [
     "api",
