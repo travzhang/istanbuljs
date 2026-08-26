@@ -1,4 +1,7 @@
+import { join } from "node:path";
+
 import { defineConfig } from "vitest/config";
+const htmlModernReporter = join(process.cwd(), "html-modern.cjs");
 
 export default defineConfig({
   test: {
@@ -6,10 +9,8 @@ export default defineConfig({
       enabled: true,
       provider: "v8",
       include: ["packages/**/src/**/*.ts"],
-      exclude: ["packages/istanbul-lib-report/src/reports/**"],
-      reporter: ["json"],
+      reporter: ["json", [htmlModernReporter, { writeReportDataJson: true }]],
     },
-    reporters: ["default", "./scripts/local-html-coverage-reporter.ts"],
-    projects: ["packages/*"],
+    projects: ["packages/*/vitest.config.*"],
   },
 });
