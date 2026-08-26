@@ -6,5 +6,5 @@ Source map support for istanbuljs.
 
 ## Debugging
 
-`@vitest/istanbul-lib-source-maps` uses the [debug](https://www.npmjs.com/package/debug) module. Run your application with the environment variable `DEBUG=istanbuljs`, to receive debug
+`@vitest/istanbul-lib-source-maps` uses the [obug](https://www.npmjs.com/package/obug) module. Run your application with the environment variable `DEBUG=istanbuljs`, to receive debug
 output.

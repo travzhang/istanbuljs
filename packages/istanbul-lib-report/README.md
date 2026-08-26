@@ -42,7 +42,7 @@ report.execute(context);
 
 ### Custom reporters
 
-`create()` only knows the built-in reporters. To load a custom reporter use`createAsync()`, which accepts a built-in name, a package name, an absolute path or a `file://` URL.
+`create()` only knows the built-in reporters. To load a custom reporter use `createAsync()`, which accepts a built-in name, a package name, an absolute path or a `file://` URL.
 The module's default export (ESM) or `module.exports` (CommonJS) must be the report class:
 
 ```js
