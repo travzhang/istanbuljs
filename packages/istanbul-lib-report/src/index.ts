@@ -21,7 +21,6 @@ import type { CoberturaOptions } from "./reports/cobertura/index";
 import HtmlSpaReport from "./reports/html-spa/index";
 import type { HtmlSpaOptions } from "./reports/html-spa/index";
 import HtmlReport from "./reports/html/index";
-import IstanbulReporterModernHtml from 'canyonjs-dev-report'
 import type { HtmlOptions } from "./reports/html/index";
 import JsonSummaryReport from "./reports/json-summary/index";
 import type { JsonSummaryOptions } from "./reports/json-summary/index";
@@ -97,7 +96,7 @@ export { FileWriter };
 const reports = {
   clover: CloverReport,
   cobertura: CoberturaReport,
-  html: IstanbulReporterModernHtml,
+  html: HtmlReport,
   "html-spa": HtmlSpaReport,
   json: JsonReport,
   "json-summary": JsonSummaryReport,

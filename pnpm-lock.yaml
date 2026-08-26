@@ -30,9 +30,6 @@ catalogs:
     '@vitest/coverage-v8':
       specifier: 4.1.11
       version: 4.1.11
-    canyonjs-dev-report:
-      specifier: ^1.0.18
-      version: 1.0.18
     changelogithub:
       specifier: ^15.0.4
       version: 15.0.4
@@ -129,9 +126,6 @@ importers:
       '@vitest/istanbul-lib-coverage':
         specifier: workspace:*
         version: link:../istanbul-lib-coverage
-      canyonjs-dev-report:
-        specifier: 'catalog:'
-        version: 1.0.18
     devDependencies:
       '@vitest/browser-playwright':
         specifier: 'catalog:'
@@ -1014,12 +1008,6 @@ packages:
 
   caniuse-lite@1.0.30001809:
     resolution: {integrity: sha512-xxWVywk6a6Arlk+hymeycyn/VgqEfLDxupvhH/xiY5SJ/18kmi9o6MiO320DCUzypORHLtvh0I4i04tUhCNHNQ==}
-
-  canyonjs-dev-report-html@1.0.18:
-    resolution: {integrity: sha512-oYZHnCfI3cjP7Enz54ZAjUjNl7SxTAoyuPWsKd34kIxh3a4hEMuteh0bKDXHSCe69cAyzl4jMEvxtZWQiMuESQ==}
-
-  canyonjs-dev-report@1.0.18:
-    resolution: {integrity: sha512-mg7GjE18gkMj8ELjqrzmA4N0xfWc1x1Te51zoqWuSiFfzhk+eu9T5tUpqPAncOMoriVwEHb7AWH/SRO9k/Mr0Q==}
 
   chai@6.2.2:
     resolution: {integrity: sha512-NUPRluOfOiTKBKvWPtSD4PhFvWCqOi0BGStNWs57X9js7XGTprSmFoz5F0tWhR4WPjNeR9jXqdC7/UpSJTnlRg==}
@@ -2398,16 +2386,6 @@ snapshots:
   cac@7.0.0: {}
 
   caniuse-lite@1.0.30001809: {}
-
-  canyonjs-dev-report-html@1.0.18:
-    optional: true
-
-  canyonjs-dev-report@1.0.18:
-    dependencies:
-      istanbul-lib-coverage: 3.2.2
-      istanbul-lib-report: 3.0.1
-    optionalDependencies:
-      canyonjs-dev-report-html: 1.0.18
 
   chai@6.2.2: {}
 
