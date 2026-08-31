@@ -169,16 +169,35 @@ function asClassName(node: ReportNode): string {
   return node.getRelativeName().replace(/.*[\\/]/, "");
 }
 
+const ANONYMOUS_NAME = /^\(anonymous_(\d+)\)$/;
+
 /** Returns a namer that deduplicates method names within one class. */
 function createUniqueNamer() {
   const used = new Set<string>();
   return (name: string | undefined): string => {
     const base = name || "(anonymous)";
-    let next = base;
+    if (!used.has(base)) {
+      used.add(base);
+      return base;
+    }
+
+    const anonMatch = ANONYMOUS_NAME.exec(base);
+    if (anonMatch) {
+      let i = Number(anonMatch[1]) + 1;
+      let next = `(anonymous_${i})`;
+      while (used.has(next)) {
+        i += 1;
+        next = `(anonymous_${i})`;
+      }
+      used.add(next);
+      return next;
+    }
+
     let i = 2;
+    let next = `${base}_${i}`;
     while (used.has(next)) {
-      next = `${base}_${i}`;
       i += 1;
+      next = `${base}_${i}`;
     }
     used.add(next);
     return next;

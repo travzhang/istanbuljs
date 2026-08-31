@@ -144,6 +144,6 @@ describe("CoberturaReport", () => {
     while ((match = re.exec(output))) {
       names.push(match[1]);
     }
-    expect(names).toEqual(["constructor", "constructor_2", "(anonymous_0)", "(anonymous_0)_2"]);
+    expect(names).toEqual(["constructor", "constructor_2", "(anonymous_0)", "(anonymous_1)"]);
   });
 });
