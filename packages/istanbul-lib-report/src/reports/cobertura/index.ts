@@ -115,13 +115,15 @@ class CoberturaReport extends ReportBase {
 
     this.xml!.openTag("methods");
     const fnMap = fileCoverage.fnMap;
+    const uniqueMethodName = createUniqueNamer();
     Object.entries(fnMap).forEach(([k, { name, decl, loc }]) => {
       const hits = fileCoverage.f[k];
       // Some versions of the instrumenter in the wild populate 'loc'
       // but not 'decl':
       const start = (decl || loc).start;
       this.xml!.openTag("method", {
-        name: escape(name),
+        // Jenkins rejects two <method> tags with the same name in one class.
+        name: escape(uniqueMethodName(name)),
         hits,
         signature: "()V", //fake out a no-args void return
       });
@@ -165,6 +167,22 @@ function asJavaPackage(node: ReportNode): string {
 
 function asClassName(node: ReportNode): string {
   return node.getRelativeName().replace(/.*[\\/]/, "");
+}
+
+/** Returns a namer that deduplicates method names within one class. */
+function createUniqueNamer() {
+  const used = new Set<string>();
+  return (name: string | undefined): string => {
+    const base = name || "(anonymous)";
+    let next = base;
+    let i = 2;
+    while (used.has(next)) {
+      next = `${base}_${i}`;
+      i += 1;
+    }
+    used.add(next);
+    return next;
+  };
 }
 
 export default CoberturaReport;
