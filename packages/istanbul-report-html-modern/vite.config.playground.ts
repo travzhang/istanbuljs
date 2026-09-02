@@ -44,8 +44,6 @@ export default defineConfig({
       "antd",
       "monaco-editor/editor/editor.api",
       "monaco-editor/editor/contrib/hover/browser/hoverContribution",
-      "monaco-editor/languages/definitions/css/register",
-      "monaco-editor/languages/definitions/html/register",
       "monaco-editor/languages/definitions/javascript/register",
       "monaco-editor/languages/definitions/typescript/register",
       "react-dom/server",
