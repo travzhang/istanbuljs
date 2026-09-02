@@ -2,13 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "monaco-editor-css";
 
-import { loadReportData } from "./helpers/loadData.ts";
-import ReportPage from "./ReportPage.tsx";
+import { loadDevReportData } from "./load-data.ts";
+import ReportShell from "./shell.tsx";
 
-await loadReportData();
+await loadDevReportData();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ReportPage />
+    <ReportShell />
   </StrictMode>,
 );

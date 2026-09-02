@@ -51,9 +51,6 @@ export interface ReportData {
   packageVersion?: string;
 }
 
-/** @deprecated use {@link ReportData} */
-export type CovData = ReportData;
-
 /** output from {@link CoverageReport.generate} */
 export interface GenerateResult {
   reportData: ReportData;

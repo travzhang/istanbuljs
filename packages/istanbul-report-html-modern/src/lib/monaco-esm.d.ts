@@ -5,5 +5,3 @@ declare module "monaco-editor/editor/editor.api" {
 declare module "monaco-editor/editor/contrib/hover/browser/hoverContribution" {}
 declare module "monaco-editor/languages/definitions/javascript/register" {}
 declare module "monaco-editor/languages/definitions/typescript/register" {}
-declare module "monaco-editor/languages/definitions/css/register" {}
-declare module "monaco-editor/languages/definitions/html/register" {}

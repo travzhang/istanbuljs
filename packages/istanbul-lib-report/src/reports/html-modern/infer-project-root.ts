@@ -1,67 +1,51 @@
-/** Parent directory with POSIX slashes (empty string if none / only filesystem root). */
-function posixParentDir(filePath: string): string {
-  const posix = filePath.replaceAll("\\", "/").replace(/\/+$/, "");
-  const idx = posix.lastIndexOf("/");
-  // Match SummarizerFactory: file directly under `/` has an empty parent path.
-  if (idx <= 0) {
-    return "";
+import Path from "../../path";
+
+/** Map a coverage file path to {@link Path}, including Windows drive paths on any platform. */
+function filePathToPath(filePath: string): Path {
+  const normalized = filePath.replaceAll("\\", "/");
+  if (/^[A-Za-z]:(?:\/|$)/.test(normalized)) {
+    const withoutDrive = normalized.replace(/^[A-Za-z]:\/?/, "");
+    const segments = withoutDrive ? withoutDrive.split("/").filter(Boolean) : [];
+    return new Path(segments);
   }
-  return posix.slice(0, idx);
+
+  return new Path(filePath);
 }
 
-function commonPrefixSegments(paths: string[]): string[] {
-  if (paths.length === 0) {
-    return [];
+/** Restore a filesystem path prefix dropped by {@link Path} (POSIX `/` or Windows drive). */
+function formatProjectRoot(common: Path, filePaths: string[]): string {
+  const relative = common.toString();
+  const sample = filePaths[0]!.replaceAll("\\", "/");
+
+  const driveMatch = sample.match(/^([A-Za-z]:)(?:\/|$)/);
+  if (driveMatch) {
+    return relative ? `${driveMatch[1]}/${relative}` : driveMatch[1];
   }
 
-  const segmentsList = paths.map((p) => {
-    if (p === "") {
-      return [];
-    }
-    if (p === "/") {
-      return [""];
-    }
-    return p.split("/");
-  });
-
-  let common = segmentsList[0]!;
-  for (let i = 1; i < segmentsList.length; i++) {
-    const other = segmentsList[i]!;
-    const next: string[] = [];
-    const len = Math.min(common.length, other.length);
-    for (let j = 0; j < len; j++) {
-      if (common[j] === other[j]) {
-        next.push(common[j]!);
-      } else {
-        break;
-      }
-    }
-    common = next;
-    if (common.length === 0) {
-      break;
-    }
+  if (sample.startsWith("/")) {
+    return relative ? `/${relative}` : "/";
   }
 
-  return common;
+  return relative;
 }
 
 /**
- * Infer project root like SummarizerFactory's `_commonParent`:
- * the common parent directory of all coverage file paths.
- * Returns `undefined` when there is no useful shared prefix (including filesystem root only).
+ * Infer project root from coverage file paths: the common parent directory
+ * of all file paths (same algorithm as SummarizerFactory `_commonParent`).
+ * Returns `undefined` when there is no useful shared prefix.
  */
 export function inferProjectRoot(filePaths: string[]): string | undefined {
   if (filePaths.length === 0) {
     return undefined;
   }
 
-  const common = commonPrefixSegments(filePaths.map(posixParentDir));
-  // Empty or only `""` (POSIX `/`) is not a useful project root for relativizing paths.
-  if (common.length === 0 || (common.length === 1 && common[0] === "")) {
+  const parentPaths = filePaths.map((filePath) => filePathToPath(filePath).parent());
+  const common = Path.findCommonParent(parentPaths);
+  if (common.length === 0) {
     return undefined;
   }
 
-  return common.join("/");
+  return formatProjectRoot(common, filePaths);
 }
 
 export function resolveProjectRoot(filePaths: string[], explicit?: string): string {

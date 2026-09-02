@@ -8,7 +8,8 @@
     "noEmit": true
   },
   "include": [
-    "src",
+    "src/lib",
+    "src/page",
     "vite.config.ts",
     "vite.config.playground.ts",
     "vite-plugin-report-data-dev.ts",

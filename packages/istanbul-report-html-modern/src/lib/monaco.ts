@@ -1,12 +1,11 @@
 import * as monaco from "monaco-editor/editor/editor.api";
 import "monaco-editor/editor/contrib/hover/browser/hoverContribution";
-import "monaco-editor/languages/definitions/css/register";
-import "monaco-editor/languages/definitions/html/register";
 import "monaco-editor/languages/definitions/javascript/register";
 import "monaco-editor/languages/definitions/typescript/register";
 
 export { monaco };
 
+/** Map coverage file paths to Monaco languages (JS/TS only; others use plaintext). */
 export function languageFromPath(filePath: string): string {
   const ext = filePath.split(".").pop()?.toLowerCase();
   switch (ext) {
@@ -20,12 +19,6 @@ export function languageFromPath(filePath: string): string {
     case "cjs":
     case "jsx":
       return "javascript";
-    case "css":
-    case "scss":
-      return "css";
-    case "html":
-    case "htm":
-      return "html";
     default:
       return "plaintext";
   }
