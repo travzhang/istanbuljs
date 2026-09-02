@@ -38,4 +38,7 @@ export default defineConfig({
       "react-highlight-words",
     ],
   },
+  server: {
+    port: 30614,
+  },
 });
