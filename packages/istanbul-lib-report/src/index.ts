@@ -53,7 +53,6 @@ export type { CoberturaOptions } from "./reports/cobertura/index";
 export type { HtmlSpaOptions } from "./reports/html-spa/index";
 export type {
   CoverageData,
-  CovData,
   GenerateOptions,
   GenerateResult,
   HtmlModernOptions,

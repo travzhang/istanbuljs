@@ -14,8 +14,8 @@ export interface HtmlModernOptions {
   metricsToShow?: ("lines" | "branches" | "functions" | "statements")[];
   /**
    * Project root used to relativize coverage paths in the UI.
-   * Defaults to the common parent of coverage file directories (same idea as
-   * SummarizerFactory `_commonParent`), falling back to `process.cwd()`.
+   * Defaults to the common parent of coverage file directories (see
+   * {@link inferProjectRoot}), falling back to `process.cwd()`.
    */
   projectRoot?: string;
   /** write `report-data.json` alongside `index.html` in the report output directory */

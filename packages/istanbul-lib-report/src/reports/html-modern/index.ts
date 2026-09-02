@@ -14,7 +14,6 @@ export type { LinkMapper } from "../html/index";
 export type { HtmlModernOptions } from "./options";
 export type {
   CoverageData,
-  CovData,
   GenerateOptions,
   GenerateResult,
   IstanbulReportContext,
@@ -27,19 +26,19 @@ export { extractIstanbulContext } from "./istanbul-context";
 export { inferProjectRoot, resolveProjectRoot } from "./infer-project-root";
 
 class HtmlModernReport extends ReportBase {
-  private options: HtmlModernOptions;
+  private htmlOptions: HtmlModernOptions;
   private coverage: Record<string, FileCoverageData> = {};
   private summarizer?: Summarizers;
 
   constructor(opts: HtmlModernOptions & Partial<ReportBaseOptions> = {}) {
     super(opts);
-    this.options = opts;
-    this.coverage = {};
+    this.htmlOptions = opts;
     if (opts.summarizer !== undefined) {
       this.summarizer = opts.summarizer;
     }
   }
 
+  /** Called for each file node during tree traversal; stores a deep clone keyed by path. */
   onDetail(node: ReportNode): void {
     const fileCoverage: FileCoverageData = JSON.parse(
       JSON.stringify(node.getFileCoverage().toJSON()),
@@ -47,9 +46,10 @@ class HtmlModernReport extends ReportBase {
     this.coverage[fileCoverage.path] = fileCoverage;
   }
 
+  /** Called after traversal completes; generates the HTML report via {@link CoverageReport}. */
   async onEnd(_rootNode: ReportNode, context: Context): Promise<void> {
-    const cr = new CoverageReport(this.options);
-    await cr.generate({
+    const coverageReport = new CoverageReport(this.htmlOptions);
+    await coverageReport.generate({
       coverage: this.coverage,
       targetDir: context.dir,
       sourceFinder: context.sourceFinder,
