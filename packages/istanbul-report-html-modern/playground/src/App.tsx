@@ -1,9 +1,9 @@
 import reportData from "@repo/fixtures/report-data.json";
-import { useMemo } from "react";
+import { buildReportFiles, ReportApp } from "@vitest/istanbul-report-html-modern";
 
-import { buildReportFiles } from "../../src/helpers/build-report-files";
-import { ReportApp } from "../../src/ReportApp";
-import type { FileCoverageData } from "../../src/types";
+import "@vitest/istanbul-report-html-modern/style.css";
+import type { FileCoverageData } from "@vitest/istanbul-report-html-modern";
+import { useMemo } from "react";
 
 export function App() {
   const prepared = useMemo(

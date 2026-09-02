@@ -14,15 +14,29 @@ const monacoCss = join(
   "../../min/vs/editor/editor.main.css",
 );
 
-/** UI playground (consumes React components from `src/`) */
+/** UI playground (consumes the public library API). */
 export default defineConfig({
   root: join(packageRoot, "playground"),
   plugins: [react()],
   resolve: {
-    alias: {
-      "@repo/fixtures": join(repoRoot, "coverage"),
-      "monaco-editor-css": monacoCss,
-    },
+    alias: [
+      {
+        find: "@vitest/istanbul-report-html-modern/style.css",
+        replacement: join(packageRoot, "src/lib/index.css"),
+      },
+      {
+        find: "@vitest/istanbul-report-html-modern",
+        replacement: join(packageRoot, "src/lib/index.ts"),
+      },
+      {
+        find: "@repo/fixtures",
+        replacement: join(repoRoot, "coverage"),
+      },
+      {
+        find: "monaco-editor-css",
+        replacement: monacoCss,
+      },
+    ],
   },
   optimizeDeps: {
     include: [

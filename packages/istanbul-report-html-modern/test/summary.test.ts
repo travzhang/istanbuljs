@@ -1,15 +1,15 @@
 import { assert, describe, it } from "vitest";
 
-import { buildReportFiles } from "../src/helpers/build-report-files";
-import { deriveSummaryViews } from "../src/helpers/derive-views";
-import { computeLineHits } from "../src/helpers/line-hits";
+import { buildReportFiles } from "../src/lib/helpers/build-report-files";
+import { deriveSummaryViews } from "../src/lib/helpers/derive-views";
+import { computeLineHits } from "../src/lib/helpers/line-hits";
 import {
   buildSummaryTree,
   fileCoverageToSummary,
   filesToDataSource,
   percent,
-} from "../src/helpers/summary";
-import type { FileCoverageData } from "../src/types";
+} from "../src/lib/helpers/summary";
+import type { FileCoverageData } from "../src/lib/types";
 
 function makeFile(path: string, statementHits: number[]): FileCoverageData {
   const statementMap: FileCoverageData["statementMap"] = {};

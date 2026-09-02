@@ -10,22 +10,23 @@ const packageRoot = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(packageRoot, "../..");
 const mockPath = join(repoRoot, "coverage/report-data.json");
 
-function readDevReportData(): string {
-  if (!fs.existsSync(mockPath)) {
-    return "null";
-  }
-
-  const reportData = JSON.parse(fs.readFileSync(mockPath, "utf-8")) as unknown;
-  return JSON.stringify(reportData);
-}
-
-/** Injects mock coverage data from the repo-root coverage/report-data.json during dev. */
+/** In dev, neutralize the production placeholder so inline HTML stays valid JS. */
 export function reportDataDevPlugin(): Plugin {
   return {
     name: "report-data-dev",
     apply: "serve",
     transformIndexHtml(html) {
-      return html.replace(REPORT_DATA_PLACEHOLDER, readDevReportData());
+      if (!html.includes(REPORT_DATA_PLACEHOLDER)) {
+        return html;
+      }
+
+      if (!fs.existsSync(mockPath)) {
+        console.warn(
+          `[report-data-dev] ${mockPath} not found; run repo tests once to generate it, or use pnpm play`,
+        );
+      }
+
+      return html.replace(REPORT_DATA_PLACEHOLDER, "undefined");
     },
   };
 }

@@ -14,8 +14,9 @@ export function resolveReportHtmlDist(): string | null {
   try {
     const packageJsonPath = require.resolve("@vitest/istanbul-report-html-modern/package.json");
     const distDir = path.join(path.dirname(packageJsonPath), "dist");
-    if (fs.existsSync(path.join(distDir, "index.html"))) {
-      return distDir;
+    const pageDir = path.join(distDir, "page");
+    if (fs.existsSync(path.join(pageDir, "index.html"))) {
+      return pageDir;
     }
   } catch {
     // @vitest/istanbul-report-html-modern is not installed or dist is missing

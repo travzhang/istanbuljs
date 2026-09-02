@@ -1,26 +1,23 @@
+import { buildReportFiles, ReportApp } from "@vitest/istanbul-report-html-modern";
+
+import "@vitest/istanbul-report-html-modern/style.css";
 import { useMemo } from "react";
 
 import { ReportFooter } from "./components/ReportFooter";
-import { buildReportFiles } from "./helpers/build-report-files";
-import { ReportApp } from "./ReportApp";
-
-import "./index.css";
+import type { ReportData } from "./report-data";
 
 /** Standalone single-file HTML page shell around {@link ReportApp}. */
-export function ReportPage() {
-  const reportData = window.reportData;
+export function ReportShell() {
+  const reportData = window.reportData as ReportData | undefined | null;
 
   const prepared = useMemo(() => {
-    if (reportData === undefined) {
+    if (reportData == null) {
       return null;
     }
     return buildReportFiles(reportData);
   }, [reportData]);
-  console.log({
-    prepared,
-    reportData,
-  });
-  if (prepared === null || reportData === undefined) {
+
+  if (prepared === null || reportData == null) {
     return <p>No report data loaded.</p>;
   }
 
@@ -38,4 +35,4 @@ export function ReportPage() {
   );
 }
 
-export default ReportPage;
+export default ReportShell;
