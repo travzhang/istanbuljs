@@ -5,6 +5,9 @@ cleanupUnusedCatalogs: true
 ignoreWorkspaceRootCheck: true
 shellEmulator: true
 trustPolicy: no-downgrade
+trustPolicyExclude:
+  # Transitive dep of @babel/core@7.x; predates npm provenance (false positive)
+  - semver@6.3.1
 allowBuilds:
   "fsevents": true
 packages:
@@ -29,16 +32,6 @@ catalog:
   typescript: ^7.0.2
   "@e18e/eslint-plugin": ^0.8.0
   changelogithub: ^15.0.4
-  "@ant-design/icons": ^6.3.2
-  antd: ^6.6.1
-  monaco-editor: ^0.56.0
-  react: ^19.2.8
-  react-dom: ^19.2.8
-  react-highlight-words: ^0.21.0
-  "@types/react": ^19.2.18
-  "@types/react-dom": ^19.2.4
-  "@types/react-highlight-words": ^0.20.1
-  "@vitejs/plugin-react": ^6.1.0
   vite: ^8.2.2
   vite-plugin-singlefile: ^2.3.3
   picomatch: ^4.0.7
@@ -61,6 +54,7 @@ minimumReleaseAgeExclude:
   - "@vitest/ui@5.0.0"
   - "@vitest/utils@5.0.0"
   - vitest@5.0.0
+  - '@prefresh/babel-plugin@0.5.4'
 
 # Use local packages in test run
 overrides:

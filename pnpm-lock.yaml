@@ -98,13 +98,13 @@ catalogs:
       version: 2.9.0
 
 overrides:
-  '@vitest/coverage-istanbul>@vitest/istanbul-lib-coverage': link:./packages/istanbul-lib-coverage
-  '@vitest/coverage-istanbul>@vitest/istanbul-lib-instrument': link:./packages/istanbul-lib-instrument
-  '@vitest/coverage-istanbul>@vitest/istanbul-lib-report': link:./packages/istanbul-lib-report
-  '@vitest/coverage-istanbul>@vitest/istanbul-lib-source-maps': link:./packages/istanbul-lib-source-maps
-  '@vitest/coverage-v8>@vitest/istanbul-lib-coverage': link:./packages/istanbul-lib-coverage
-  '@vitest/coverage-v8>@vitest/istanbul-lib-report': link:./packages/istanbul-lib-report
-  vitest>@vitest/istanbul-lib-report: link:./packages/istanbul-lib-report
+  '@vitest/coverage-istanbul>@vitest/istanbul-lib-coverage': ./packages/istanbul-lib-coverage
+  '@vitest/coverage-istanbul>@vitest/istanbul-lib-instrument': ./packages/istanbul-lib-instrument
+  '@vitest/coverage-istanbul>@vitest/istanbul-lib-report': ./packages/istanbul-lib-report
+  '@vitest/coverage-istanbul>@vitest/istanbul-lib-source-maps': ./packages/istanbul-lib-source-maps
+  '@vitest/coverage-v8>@vitest/istanbul-lib-coverage': ./packages/istanbul-lib-coverage
+  '@vitest/coverage-v8>@vitest/istanbul-lib-report': ./packages/istanbul-lib-report
+  vitest>@vitest/istanbul-lib-report: ./packages/istanbul-lib-report
 
 importers:
 
@@ -252,12 +252,6 @@ importers:
       '@vitest/istanbul-lib-report':
         specifier: workspace:*
         version: link:../istanbul-lib-report
-      oxfmt:
-        specifier: 'catalog:'
-        version: 0.64.0
-      oxlint:
-        specifier: 'catalog:'
-        version: 1.79.0
       preact:
         specifier: 'catalog:'
         version: 10.29.8
