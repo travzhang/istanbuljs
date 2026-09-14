@@ -8,15 +8,17 @@
     "jsxImportSource": "preact",
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
     "types": ["node"],
     "noEmit": true,
     "paths": {
       "@vitest/istanbul-lib-coverage": ["./packages/istanbul-lib-coverage/src/index.ts"],
       "@vitest/istanbul-lib-instrument": ["./packages/istanbul-lib-instrument/src/index.ts"],
       "@vitest/istanbul-lib-report": ["./packages/istanbul-lib-report/src/index.ts"],
-      "@vitest/istanbul-lib-source-maps": ["./packages/istanbul-lib-source-maps/src/index.ts"]
+      "@vitest/istanbul-lib-source-maps": ["./packages/istanbul-lib-source-maps/src/index.ts"],
+      "@vitest/istanbul-report-html-modern": ["./packages/istanbul-report-html-modern/src/index.ts"],
+      "@vitest/istanbul-report-html-modern/style.css": ["./packages/istanbul-report-html-modern/src/index.css"]
     }
   },
-  "include": ["packages/*/src", "packages/*/test"],
-  "exclude": ["packages/istanbul-report-html-modern"]
+  "include": ["packages/*/src", "packages/*/test"]
 }

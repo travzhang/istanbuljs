@@ -1,11 +1,6 @@
 import { assert, describe, it } from "vitest";
 
-import {
-  projectRootBaseName,
-  resolveSource,
-  toAbsolutePath,
-  toRelativePath,
-} from "../src/lib/paths";
+import { projectRootBaseName, resolveSource, toAbsolutePath, toRelativePath } from "../src/paths";
 
 describe("toRelativePath", () => {
   it("strips the projectRoot prefix", () => {

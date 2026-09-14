@@ -1,4 +1,7 @@
 import type { LinkMapper } from "../html/index";
+import type { FileTagRule } from "./file-tags";
+
+export type { FileTagRule };
 
 /** options accepted by {@link HtmlModernReport} */
 export interface HtmlModernOptions {
@@ -20,4 +23,6 @@ export interface HtmlModernOptions {
   projectRoot?: string;
   /** write `report-data.json` alongside `index.html` in the report output directory */
   writeReportDataJson?: boolean;
+  /** tag rules used to filter files in the HTML report UI */
+  fileTags?: FileTagRule[];
 }

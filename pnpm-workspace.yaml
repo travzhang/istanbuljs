@@ -41,6 +41,15 @@ catalog:
   "@vitejs/plugin-react": ^6.1.0
   vite: ^8.2.2
   vite-plugin-singlefile: ^2.3.3
+  picomatch: ^4.0.7
+  "@types/picomatch": ^4.0.3
+  lucide-preact: ^1.28.0
+  "@preact/preset-vite": ^2.10.2
+  "@codemirror/lang-javascript": ^6.2.4
+  "@codemirror/language": ^6.11.3
+  "@codemirror/state": ^6.5.2
+  "@codemirror/theme-one-dark": ^6.1.3
+  "@codemirror/view": ^6.38.6
 
 minimumReleaseAgeExclude:
   - "@vitest/browser-playwright@5.0.0"
@@ -61,3 +70,4 @@ overrides:
   "@vitest/coverage-istanbul>@vitest/istanbul-lib-source-maps": "./packages/istanbul-lib-source-maps"
   "@vitest/coverage-v8>@vitest/istanbul-lib-coverage": "./packages/istanbul-lib-coverage"
   "@vitest/coverage-v8>@vitest/istanbul-lib-report": "./packages/istanbul-lib-report"
+  "vitest>@vitest/istanbul-lib-report": "./packages/istanbul-lib-report"

@@ -1,7 +1,7 @@
 import { buildReportFiles, ReportApp } from "@vitest/istanbul-report-html-modern";
 
 import "@vitest/istanbul-report-html-modern/style.css";
-import { useMemo } from "react";
+import { useMemo } from "preact/hooks";
 
 import { ReportFooter } from "./components/ReportFooter";
 import type { ReportData } from "./report-data";
@@ -24,7 +24,14 @@ export function ReportShell() {
   return (
     <div className="report-page">
       <div className="report-page__content">
-        <ReportApp files={prepared.files} projectRoot={prepared.projectRoot} name={prepared.name} />
+        <ReportApp
+          files={prepared.files}
+          projectRoot={prepared.projectRoot}
+          name={prepared.name}
+          fileTagRules={prepared.fileTagRules}
+          fileTagsByPath={prepared.fileTagsByPath}
+          statementWatermarks={prepared.statementWatermarks}
+        />
       </div>
       <ReportFooter
         generatedAt={reportData.generatedAt}

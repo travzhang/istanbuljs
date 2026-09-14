@@ -1,12 +1,13 @@
-/** Keep in sync with packages/istanbul-lib-report/src/reports/html-modern/coverage-report.ts */
+/** Serialized coverage report payload embedded in the single-file HTML page. */
 export interface ReportData {
-  html: {
+  html?: {
     verbose?: boolean;
     subdir?: string;
     skipEmpty?: boolean;
     metricsToShow?: ("lines" | "branches" | "functions" | "statements")[];
+    fileTags?: { glob: string; tag: string }[];
   };
-  istanbul: {
+  istanbul?: {
     dir: string;
     watermarks: {
       statements: [number, number];
@@ -18,7 +19,7 @@ export interface ReportData {
     summarizer?: "flat" | "nested" | "pkg" | "defaultSummarizer";
     sourceFinder: "filesystem" | "custom";
   };
-  stats: {
+  stats?: {
     coverageFileCount: number;
     sourceFileCount: number;
   };
@@ -26,6 +27,8 @@ export interface ReportData {
   projectRoot: string;
   coverage: Record<string, unknown>;
   sources: Record<string, string>;
+  fileTagRules?: { glob: string; tag: string }[];
+  fileTagsByPath?: Record<string, string[]>;
   generatedAt?: string;
   packageName?: string;
   packageVersion?: string;

@@ -33,7 +33,7 @@ export function ReportFooter({ generatedAt, packageName, packageVersion }: Repor
           target="_blank"
           rel="noopener noreferrer"
         >
-          istanbul
+          @vitest/istanbul-report-html-modern
         </a>
         {hasPackageInfo ? (
           <>
