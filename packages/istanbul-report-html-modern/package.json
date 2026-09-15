@@ -15,7 +15,7 @@
     "url": "https://github.com/vitest-dev/vitest/issues"
   },
   "license": "MIT",
-  "author": "Vitest Team",
+  "author": "Travis Zhang<https://github.com/travzhang>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vitest-dev/istanbuljs.git",
