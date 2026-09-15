@@ -1,5 +1,5 @@
-import { base64ToUint8Array, decompressGzip } from "./decompress.ts";
-import type { ReportData } from "./report-data.ts";
+import { base64ToUint8Array, decompressGzip } from "./decompress";
+import type { ReportData } from "./report-data";
 
 /**
  * Decode gzip+base64 `window.reportData` (as embedded by the html-modern reporter)

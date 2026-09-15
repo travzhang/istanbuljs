@@ -1,8 +1,8 @@
 import { defineConfig } from "tsdown";
 
-/** React component library → `dist/index.js` + `dist/style.css` */
+/** Preact component library → `dist/index.js` + `dist/style.css` */
 export default defineConfig({
-  entry: ["src/lib/index.ts"],
+  entry: ["src/index.ts"],
   platform: "neutral",
   dts: true,
   exports: true,

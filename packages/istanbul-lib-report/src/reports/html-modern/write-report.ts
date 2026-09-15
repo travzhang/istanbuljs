@@ -7,7 +7,7 @@ import type { ReportData } from "./types";
 
 const require = createRequire(import.meta.url);
 
-/** Must stay in sync with packages/istanbul-report-html-modern/report-data-placeholder.ts */
+/** Must stay in sync with `@vitest/istanbul-report-html-modern` `report-data-placeholder.ts`. */
 export const REPORT_DATA_PLACEHOLDER = "__REPORT_DATA__";
 
 export function resolveReportHtmlDist(): string | null {

@@ -1,15 +1,15 @@
 import { assert, describe, it } from "vitest";
 
-import { buildReportFiles } from "../src/lib/helpers/build-report-files";
-import { deriveSummaryViews } from "../src/lib/helpers/derive-views";
-import { computeLineHits } from "../src/lib/helpers/line-hits";
+import { buildReportFiles } from "../src/helpers/build-report-files";
+import { deriveSummaryViews } from "../src/helpers/derive-views";
+import { computeLineHits } from "../src/helpers/line-hits";
 import {
   buildSummaryTree,
   fileCoverageToSummary,
   filesToDataSource,
   percent,
-} from "../src/lib/helpers/summary";
-import type { FileCoverageData } from "../src/lib/types";
+} from "../src/helpers/summary";
+import type { FileCoverageData } from "../src/types";
 
 function makeFile(path: string, statementHits: number[]): FileCoverageData {
   const statementMap: FileCoverageData["statementMap"] = {};
@@ -66,6 +66,30 @@ describe("buildSummaryTree", () => {
 });
 
 describe("deriveSummaryViews", () => {
+  it("filters by any selected tag", () => {
+    const dataSource = [
+      { path: "src/a.ts", tags: ["team-a"], ...fileCoverageToSummary(makeFile("src/a.ts", [1])) },
+      { path: "src/b.ts", tags: ["team-b"], ...fileCoverageToSummary(makeFile("src/b.ts", [1])) },
+      {
+        path: "src/c.ts",
+        tags: ["team-a", "P0"],
+        ...fileCoverageToSummary(makeFile("src/c.ts", [1])),
+      },
+    ];
+
+    const views = deriveSummaryViews({
+      dataSource,
+      filenameKeywords: "",
+      selectedTags: ["team-a", "P0"],
+      value: "",
+    });
+
+    assert.deepEqual(
+      views.listDataSource.map((item) => item.path),
+      ["src/a.ts", "src/c.ts"],
+    );
+  });
+
   it("filters by keywords and current path", () => {
     const dataSource = [
       { path: "src/a.ts", ...fileCoverageToSummary(makeFile("src/a.ts", [1])) },

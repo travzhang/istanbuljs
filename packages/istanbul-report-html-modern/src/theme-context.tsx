@@ -1,12 +1,6 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type FC,
-  type ReactNode,
-} from "react";
+import { createContext } from "preact";
+import type { ComponentChildren, FunctionalComponent as FC } from "preact";
+import { useCallback, useContext, useEffect, useState } from "preact/hooks";
 
 export type ThemeMode = "light" | "dark";
 
@@ -47,7 +41,7 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export const ThemeProvider: FC<{ children: ComponentChildren }> = ({ children }) => {
   const [theme, setTheme] = useState<ThemeMode>(() => resolveTheme());
 
   useEffect(() => {
