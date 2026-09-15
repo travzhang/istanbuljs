@@ -5,9 +5,6 @@ cleanupUnusedCatalogs: true
 ignoreWorkspaceRootCheck: true
 shellEmulator: true
 trustPolicy: no-downgrade
-trustPolicyExclude:
-  # Transitive dep of @babel/core@7.x; predates npm provenance (false positive)
-  - semver@6.3.1
 allowBuilds:
   "fsevents": true
 packages:
