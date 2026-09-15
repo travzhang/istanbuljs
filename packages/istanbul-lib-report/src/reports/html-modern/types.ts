@@ -1,7 +1,7 @@
 import type { FileCoverageData } from "@vitest/istanbul-lib-coverage";
 
 import type { Summarizers, Watermarks } from "../../index";
-import type { HtmlModernOptions } from "./options";
+import type { FileTagRule, HtmlModernOptions } from "./options";
 
 /** coverage data keyed by absolute file path */
 export type CoverageData = Record<string, FileCoverageData>;
@@ -46,6 +46,10 @@ export interface ReportData {
   projectRoot: string;
   coverage: CoverageData;
   sources: Record<string, string>;
+  /** configured tag rules (snapshot for the HTML UI) */
+  fileTagRules?: FileTagRule[];
+  /** project-relative path → tags resolved at report generation time */
+  fileTagsByPath?: Record<string, string[]>;
   generatedAt?: string;
   packageName?: string;
   packageVersion?: string;

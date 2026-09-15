@@ -26,7 +26,6 @@ export async function decompressGzip(compressedData: Uint8Array) {
     }
   }
 
-  // Merge decompressed chunks into one buffer.
   const totalLength = chunks.reduce((sum, chunk) => sum + chunk.length, 0);
   const result = new Uint8Array(totalLength);
   let offset = 0;

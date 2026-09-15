@@ -1,4 +1,5 @@
-import { type FC, useCallback, useMemo } from "react";
+import type { FunctionalComponent as FC } from "preact";
+import { useCallback, useMemo } from "preact/hooks";
 
 import { emptyFileCoverage } from "./helpers/empty-coverage";
 import { filesToDataSource } from "./helpers/summary";
@@ -12,6 +13,9 @@ export const ReportApp: FC<ReportAppProps> = ({
   projectRoot,
   name,
   defaultValue = "",
+  fileTagRules,
+  fileTagsByPath,
+  statementWatermarks,
 }) => {
   const [value, setValue] = useHashPath(defaultValue);
 
@@ -22,7 +26,16 @@ export const ReportApp: FC<ReportAppProps> = ({
     }));
   }, [files, projectRoot]);
 
-  const dataSource = useMemo(() => filesToDataSource(relativeFiles), [relativeFiles]);
+  const dataSource = useMemo(() => {
+    const rows = filesToDataSource(relativeFiles);
+    if (fileTagsByPath === undefined) {
+      return rows;
+    }
+    return rows.map((row) => ({
+      ...row,
+      tags: fileTagsByPath[row.path] ?? [],
+    }));
+  }, [relativeFiles, fileTagsByPath]);
   const reportName = name ?? projectRootBaseName(projectRoot);
 
   const onSelect = useCallback(
@@ -45,7 +58,14 @@ export const ReportApp: FC<ReportAppProps> = ({
 
   return (
     <div style={{ height: "100%" }}>
-      <Report name={reportName} value={value} dataSource={dataSource} onSelect={onSelect} />
+      <Report
+        name={reportName}
+        value={value}
+        dataSource={dataSource}
+        onSelect={onSelect}
+        fileTagRules={fileTagRules}
+        statementWatermarks={statementWatermarks}
+      />
     </div>
   );
 };

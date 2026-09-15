@@ -3,6 +3,8 @@ import { createRequire } from "node:module";
 
 import { resolveProjectRoot } from "./infer-project-root";
 import type { HtmlModernOptions } from "./options";
+import { toRelativePath } from "./paths";
+import { resolveFileTags } from "./resolve-file-tags";
 import type {
   CoverageData,
   GenerateOptions,
@@ -14,7 +16,9 @@ import type {
 import { resolveReportHtmlDist, writeHtmlReport, writeReportDataJson } from "./write-report";
 
 const require = createRequire(import.meta.url);
-const { name: packageName, version: packageVersion } = require("../../../package.json") as {
+const { name: packageName, version: packageVersion } = require(
+  require.resolve("@vitest/istanbul-report-html-modern/package.json"),
+) as {
   name: string;
   version: string;
 };
@@ -39,6 +43,9 @@ function serializeHtmlOptions(options: HtmlModernOptions): SerializableHtmlModer
   }
   if (options.writeReportDataJson !== undefined) {
     html.writeReportDataJson = options.writeReportDataJson;
+  }
+  if (options.fileTags !== undefined) {
+    html.fileTags = options.fileTags;
   }
 
   return html;
@@ -66,6 +73,14 @@ export class CoverageReport {
       }
     }
 
+    const projectRoot = resolveProjectRoot(Object.keys(coverage), this.htmlOptions.projectRoot);
+    const relativePaths = Object.keys(coverage).map((filePath) =>
+      toRelativePath(filePath, projectRoot),
+    );
+    const fileTagsByPath = resolveFileTags(relativePaths, this.htmlOptions.fileTags, {
+      verbose: this.htmlOptions.verbose,
+    });
+
     return {
       html: serializeHtmlOptions(this.htmlOptions),
       istanbul,
@@ -73,9 +88,11 @@ export class CoverageReport {
         coverageFileCount: Object.keys(coverage).length,
         sourceFileCount: Object.keys(sources).length,
       },
-      projectRoot: resolveProjectRoot(Object.keys(coverage), this.htmlOptions.projectRoot),
+      projectRoot,
       coverage,
       sources,
+      fileTagRules: this.htmlOptions.fileTags,
+      fileTagsByPath: Object.keys(fileTagsByPath).length > 0 ? fileTagsByPath : undefined,
       generatedAt: new Date().toISOString(),
       packageName,
       packageVersion,
@@ -99,7 +116,9 @@ export class CoverageReport {
         console.log(`HTML report written to ${htmlReportPath}`);
       }
     } else if (this.htmlOptions.verbose) {
-      console.log("@vitest/istanbul-report-html-modern not found, skipping HTML report generation");
+      console.log(
+        "@vitest/istanbul-report-html-modern dist/page not found, skipping HTML report generation",
+      );
     }
 
     if (this.htmlOptions.writeReportDataJson) {

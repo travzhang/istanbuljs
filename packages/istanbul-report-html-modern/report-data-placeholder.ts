@@ -1,2 +1,2 @@
-/** Placeholder replaced at report generation time; keep in sync with coverage-report.ts */
+/** Placeholder replaced at report generation time. */
 export const REPORT_DATA_PLACEHOLDER = "__REPORT_DATA__";

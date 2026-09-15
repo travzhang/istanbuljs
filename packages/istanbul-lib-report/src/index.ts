@@ -63,8 +63,10 @@ export type {
 } from "./reports/html-modern/index";
 export {
   CoverageReport,
+  collectAvailableTags,
   extractIstanbulContext,
   inferProjectRoot,
+  resolveFileTags,
 } from "./reports/html-modern/index";
 export { default as HtmlModernReport } from "./reports/html-modern/index";
 export type { HtmlOptions, LinkMapper } from "./reports/html/index";

@@ -11,7 +11,8 @@ import { extractIstanbulContext } from "./istanbul-context";
 import type { HtmlModernOptions } from "./options";
 
 export type { LinkMapper } from "../html/index";
-export type { HtmlModernOptions } from "./options";
+export type { FileTagRule, HtmlModernOptions } from "./options";
+export { collectAvailableTags, resolveFileTags } from "./resolve-file-tags";
 export type {
   CoverageData,
   GenerateOptions,
