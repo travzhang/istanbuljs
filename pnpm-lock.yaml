@@ -104,7 +104,6 @@ overrides:
   '@vitest/coverage-istanbul>@vitest/istanbul-lib-source-maps': ./packages/istanbul-lib-source-maps
   '@vitest/coverage-v8>@vitest/istanbul-lib-coverage': ./packages/istanbul-lib-coverage
   '@vitest/coverage-v8>@vitest/istanbul-lib-report': ./packages/istanbul-lib-report
-  vitest>@vitest/istanbul-lib-report: ./packages/istanbul-lib-report
 
 importers:
 
