@@ -42,7 +42,8 @@
     "build:page": "vite build",
     "dev": "vite",
     "play": "vite --config vite.config.playground.ts",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "lucide-preact": "catalog:",

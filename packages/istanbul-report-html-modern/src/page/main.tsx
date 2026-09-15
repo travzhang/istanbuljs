@@ -1,7 +1,7 @@
 import { render } from "preact";
 
-import { loadDevReportData } from "./load-data.ts";
-import ReportShell from "./shell.tsx";
+import { loadDevReportData } from "./load-data";
+import ReportShell from "./shell";
 
 await loadDevReportData();
 

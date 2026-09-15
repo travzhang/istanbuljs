@@ -1,5 +1,5 @@
 import { render } from "preact";
 
-import { App } from "./App.tsx";
+import { App } from "./App";
 
 render(<App />, document.querySelector("#app")!);
